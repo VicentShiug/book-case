@@ -1,95 +1,84 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+import BooksList from "@/components/booksList";
+import Sidebar from "@/components/sidebar";
+import useAuth from "@/hooks/useAuth";
+import { auth } from "@/service/firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useEffect } from "react";
 
-export default function Home() {
+export default function Home () {
+  const { user, setUser } = useAuth()
+  console.log(user)
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const { displayName, photoURL, uid } = user
+        setUser({
+          id: uid,
+          name: displayName,
+          avatar: photoURL,
+          accessToken: user.accessToken
+        })
+      }
+    })
+  }, [])
+
+  const handleClickButtonLogin = async () => {
+    const provider = new GoogleAuthProvider()
+    const result = await signInWithPopup(auth, provider)
+    console.log(result)
+    if (result.user) {
+      const { displayName, photoURL, uid } = result.user
+      setUser({
+        id: uid,
+        name: displayName,
+        avatar: photoURL,
+        accessToken: accessToken
+      })
+
+    }
+  }
+
+  const getLivros = async () => {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+    // const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=a+menina+a`,
+    const response = await fetch(proxyUrl + `https://www.googleapis.com/books/v1/mylibrary/bookshelves&key=AIzaSyA6cOdhP3wVmJOX864HrZaGAtkjVyzT3YM`,
+      {
+        headers: {
+          'Authorization': `${user.accessToken}`
+        }
+      }
+    )
+    const data = await response.json()
+    console.log(data)
+  }
+
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div style={{ display: 'none', flexDirection: 'row' }}>
+
+        <Sidebar />
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <h2>Minha lista</h2>
+          <BooksList />
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div>
+        <h1>Login google</h1>
+        <div>
+          <aside>
+            <img src={user?.avatar} alt="" />
+            <h1>{user?.name}</h1>
+          </aside>
+          <main>
+            <button onClick={() => handleClickButtonLogin()}>Login google</button>
+            <button onClick={() => getLivros()}>pegar livros</button>
+          </main>
+        </div>
       </div>
+    </>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
   )
 }
