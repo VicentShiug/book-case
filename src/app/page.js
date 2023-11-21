@@ -1,79 +1,88 @@
 'use client';
 import BooksList from "@/components/booksList";
 import Sidebar from "@/components/sidebar";
+import { AuthContext, useAuthContext } from "@/context/AuthContext";
 import useAuth from "@/hooks/useAuth";
-import { auth } from "@/service/firebase";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useEffect } from "react";
+import { app, auth } from "@/service/firebase";
+import { GoogleAuthProvider, signInWithCustomToken, signInWithPopup } from "firebase/auth";
+import Link from "next/link";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home () {
-  const { user, setUser } = useAuth()
+  const router = useRouter()
+  // const { user, setUser, token } = useAuth()
+  const { user, setUser, token, setToken } = useAuthContext()
+  console.log(token)
   console.log(user)
+  const [livros, setLivros] = useState([])
+  // const [token, setToken] = useState([])
+
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    // auth.onAuthStateChanged(user => {
       if (user) {
         const { displayName, photoURL, uid } = user
+        // auth.updateCurrentUser(user)
         setUser({
           id: uid,
           name: displayName,
           avatar: photoURL,
-          accessToken: user.accessToken
+          accessToken: token
         })
+      } else {
+        
+        router.push('/Login')
       }
-    })
+    // })
+    
+    getLivros()
   }, [])
 
-  const handleClickButtonLogin = async () => {
-    const provider = new GoogleAuthProvider()
-    const result = await signInWithPopup(auth, provider)
-    console.log(result)
-    if (result.user) {
-      const { displayName, photoURL, uid } = result.user
-      setUser({
-        id: uid,
-        name: displayName,
-        avatar: photoURL,
-        accessToken: accessToken
-      })
 
-    }
-  }
-
+  
+  const url = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/volumes`;
   const getLivros = async () => {
+    if (!user || !user.accessToken) {
+      console.error("Token de acesso não encontrado")
+      return
+    }
+
+
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
     // const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=a+menina+a`,
-    const response = await fetch(proxyUrl + `https://www.googleapis.com/books/v1/mylibrary/bookshelves&key=AIzaSyA6cOdhP3wVmJOX864HrZaGAtkjVyzT3YM`,
-      {
-        headers: {
-          'Authorization': `${user.accessToken}`
-        }
+    const response = await fetch(proxyUrl + url, {
+      headers: {
+        'Authorization': `Bearer ${user.accessToken}`
       }
-    )
+    })
     const data = await response.json()
+    setLivros(data.items)
     console.log(data)
   }
 
 
   return (
     <>
-      <div style={{ display: 'none', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
 
         <Sidebar />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <h2>Minha lista</h2>
-          <BooksList />
+          <BooksList books={livros} />
         </div>
       </div>
       <div>
-        <h1>Login google</h1>
+        
         <div>
           <aside>
             <img src={user?.avatar} alt="" />
             <h1>{user?.name}</h1>
           </aside>
           <main>
-            <button onClick={() => handleClickButtonLogin()}>Login google</button>
+            {
+              user && <button onClick={() => auth.signOut()}>Logout</button>
+            }
             <button onClick={() => getLivros()}>pegar livros</button>
           </main>
         </div>
