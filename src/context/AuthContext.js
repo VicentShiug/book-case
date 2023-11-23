@@ -8,6 +8,7 @@ export const AuthContext = createContext()
 export default function AuthContextProvider ({ children }) {
   const [user, setUser] = useState()
   const [token, setToken] = useState()
+  const [livros, setLivros] = useState([])
 
   const setUserAndLog = (newUser) => {
     console.log("Setting new user:", newUser);
@@ -17,7 +18,8 @@ export default function AuthContextProvider ({ children }) {
   return (
     <AuthContext.Provider value={{
       user, setUser: setUserAndLog,
-      token, setToken
+      token, setToken,
+      livros, setLivros
     }}>
       {children}
     </AuthContext.Provider>

@@ -1,14 +1,18 @@
 'use client'
-import { AuthContext, useAuthContext } from '@/context/AuthContext';
+import { useAuthContext } from '@/context/AuthContext';
 import { auth } from '@/service/firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useContext } from 'react'
+import React, { useEffect } from 'react'
+import LoginGoogleButton from '@/components/loginGoogleButton/LoginGoogleButton';
 
 export default function Login () {
   const router = useRouter()
-  const {token, setToken, user, setUser} = useAuthContext()
+  const { token, setToken, setUser } = useAuthContext()
+  useEffect(() => {
+    token && router.push('/')
+  }, [])
+
   const handleClickButtonLogin = async () => {
 
     const provider = new GoogleAuthProvider()
@@ -30,13 +34,18 @@ export default function Login () {
     }
   }
 
-  console.log(user)
-  console.log(token)
   return (
     <>
-      <h1>Login google</h1>
-      <button onClick={() => handleClickButtonLogin()}>Login google</button>
-
+      <div className='w-screen  h-screen bg-bg bg-slate-100 fill-slate-600'>
+        <div className='flex items-center justify-center w-full h-full'>
+          <div className='flex flex-col bg-white w-1/2 flex-shrink-0 rounded-lg p-20 items-center gap-10'>
+            <h1 className='text-gray-700 text-6xl tracking-widest'>My <p className='text-orange-600 text-opacity-95'>Book</p>Shelf</h1>
+            <p className='text-2xl text-gray-600'>Welcome!</p>
+            <p className='text-1xl font-extralight text-gray-400'>A place organize your favorite books</p>
+            <LoginGoogleButton onClick={() => handleClickButtonLogin()} />
+          </div>
+        </div>
+      </div>
     </>
   )
 }
