@@ -14,9 +14,9 @@ export default function BookItem ({book}) {
           height={50}
           layout='responsive' />
         <div className='p-1 mt-2' >
-          <h3 className='text-gray-900 text-xs text-left mb-1'>{book.volumeInfo.title}</h3>
+          <h3 className='text-gray-900 text-xs text-left font-semibold mb-1'>{book.volumeInfo.title}</h3>
           <p className='text-xs font-light'>{book.volumeInfo?.authors[0]}, {book.volumeInfo.publishedDate?.slice(0, 4)}</p>
-          <span className='text-xs'> {book.volumeInfo.ratingsCount ? (Math.floor(book.volumeInfo.ratingsCount / 1) / 2).toFixed(1) : '-'} / <span className='text-gray-400'>5</span> </span>
+          <span className='text-xs'> {book.volumeInfo.averageRating ? Math.floor(book.volumeInfo.averageRating).toFixed(1)  : '-'} / <span className='text-gray-400'>5</span> </span>
           {console.log(book)}
         </div>
       </div>

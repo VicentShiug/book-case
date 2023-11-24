@@ -12,7 +12,7 @@ export default function Profile () {
   };
 
   return (
-    <div className='absolute right-0 top-10'>
+    <div className='fixed top-14 right-4'>
       <div>
         <aside className='flex items-center gap-5 border-solid bg-white w-52 h-14 rounded-full p-1 shadow-md mr-10'>
           <Image className='rounded-full shadow-xl'
@@ -23,7 +23,7 @@ export default function Profile () {
             <ul id='dropdown' className={`absolute right-0 mt-10 p-4 bg-white rounded-xl shadow-md text-gray-700 ${isDropdownVisible ? 'visible' : 'invisible'}`}>
               <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Perfil</li>
               <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Configurações</li>
-              <li onClick={useLogout({ setUser, setToken })} className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Sair</li>
+              <li onClick={useLogout({ setUser, setToken })} className='cursor-pointer block px-4 py-2 rounded-md hover:bg-gray-100 '>Sair</li>
             </ul>
           </div>
         </aside>
