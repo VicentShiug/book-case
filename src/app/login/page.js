@@ -36,14 +36,12 @@ export default function Login () {
 
   return (
     <>
-      <div className='w-screen  h-screen bg-bg bg-slate-100 fill-slate-600'>
-        <div className='flex items-center justify-center w-full h-full'>
-          <div className='flex flex-col bg-white w-1/2 flex-shrink-0 rounded-lg p-20 items-center gap-10'>
-            <h1 className='text-gray-700 text-6xl tracking-widest'>My <p className='text-orange-600 text-opacity-95'>Book</p>Shelf</h1>
-            <p className='text-2xl text-gray-600'>Welcome!</p>
-            <p className='text-1xl font-extralight text-gray-400'>A place organize your favorite books</p>
-            <LoginGoogleButton onClick={() => handleClickButtonLogin()} />
-          </div>
+      <div className='flex items-center justify-center w-full h-full '>
+        <div className='flex flex-col bg-white w-1/2 flex-shrink-0 rounded-lg p-20 items-center gap-10 shadow-2xl'>
+          <h1 className='text-gray-700 text-6xl tracking-widest'>My <p className='text-orange-600 text-opacity-95'>Book</p>Shelf</h1>
+          <p className='text-2xl text-gray-600'>Welcome!</p>
+          <p className='text-1xl font-extralight text-gray-400'>A place organize your favorite books</p>
+          <LoginGoogleButton onClick={() => handleClickButtonLogin()} />
         </div>
       </div>
     </>

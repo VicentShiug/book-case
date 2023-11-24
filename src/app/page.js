@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import MainSection from "@/components/mainSection/MainSection";
 import { UseGetAllStateBooks } from "@/hooks/useGetBooks";
+import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
 
 export default function Home () {
   const router = useRouter()
@@ -15,7 +16,7 @@ export default function Home () {
 
   useEffect(() => {
     if (!token) {
-      router.push('/Login')
+      router.push('/login')
       return
     }
     auth.onAuthStateChanged(user => {
@@ -32,14 +33,10 @@ export default function Home () {
   }, [])
 
   return (
-    <div className="w-screen h-screen bg-bg bg-no-repeat bg-right p-9 pb-10 bg-white fill-slate-600">
-      <div className="w-full h-full ">
-        <div className="flex rounded-s-xl bg-gray-100 flex-row w-full h-full">
-          <Sidebar />
-          <MainSection />
-        </div>
-      </div>
-    </div>
+    <BackgroundArea>
+      <Sidebar />
+      <MainSection />
+    </BackgroundArea>
 
   )
 }

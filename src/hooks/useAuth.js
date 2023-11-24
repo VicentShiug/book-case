@@ -12,7 +12,7 @@ export const useLogout = () => {
   const router = useRouter()
   return () => {
     auth.signOut()
-    router.push('/Login')
+    router.push('/login')
     setUser(null)
     setToken(null)
   }
