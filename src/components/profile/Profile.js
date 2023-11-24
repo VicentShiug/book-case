@@ -23,8 +23,8 @@ export default function Profile () {
           <span className='cursor-pointer ml-auto' onClick={handleClickDropdown}>{<ArrowDown />}</span>
           <div className='relative'>
             <ul id='dropdown' className={`absolute right-0 mt-10 p-4 bg-white rounded-xl shadow-md text-gray-700 ${isDropdownVisible ? 'visible' : 'invisible'}`}>
-              <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Perfil</li>
-              <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Configurações</li>
+              <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Perfil</li>
+              <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Configurações</li>
               <li onClick={useLogout({ setUser, setToken })} className='cursor-pointer block px-4 py-2 rounded-md hover:bg-gray-100 '>Sair</li>
             </ul>
           </div>

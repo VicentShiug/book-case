@@ -16,11 +16,11 @@ export default function SearchBar () {
         </div>
         <div className='relative'>
           <ul id='dropdown' className={`p-4 absolute top-14 -left-24 bg-white rounded-xl shadow-md text-gray-700 ${isDropdownVisible ? 'visible' : 'invisible'}`}>
-            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Todos</li>
-            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Título</li>
-            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Autor</li>
-            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Texto</li>
-            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 '>Assuntos</li>
+            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer '>Todos</li>
+            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Título</li>
+            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Autor</li>
+            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Texto</li>
+            <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Assuntos</li>
           </ul>
         </div>
         <input className='w-full ml-1 h-full rounded-e-full outline-none px-4' placeholder='Search' />
