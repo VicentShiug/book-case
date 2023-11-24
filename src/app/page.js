@@ -6,11 +6,11 @@ import { auth } from "@/service/firebase";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import MainSection from "@/components/mainSection/MainSection";
-import { getLivros } from "@/hooks/useGetLivros";
+import { UseGetAllStateBooks } from "@/hooks/useGetBooks";
 
 export default function Home () {
   const router = useRouter()
-  const { user, setUser, token, setLivros } = useAuthContext()
+  const { user, setUser, token, setBooksToRead, setBooksReading, setReadBooks } = useAuthContext()
 
 
   useEffect(() => {
@@ -28,8 +28,7 @@ export default function Home () {
       })
     })
 
-    const type = 4
-    getLivros({ user, setLivros, type })
+    UseGetAllStateBooks({ user, setBooksReading, setBooksToRead, setReadBooks })
   }, [])
 
   return (
