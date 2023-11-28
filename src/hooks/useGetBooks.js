@@ -33,7 +33,7 @@ export const useGetBooksReading = async ({ user, setBooksReading }) => {
   setBooksReading(data.items)
 }
 
-export const UseGetAllStateBooks = async ({ user,setBooksReading, setBooksToRead, setReadBooks }) => { 
+export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRead, setReadBooks }) => { 
   await useGetBooksReading({ user, setBooksReading })
   await useGetBooksToRead({ user, setBooksToRead })
   await useGetReadBooks({ user, setReadBooks })

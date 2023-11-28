@@ -14,7 +14,7 @@ export default function Profile () {
   };
 
   return (
-    <div className='fixed top-16 right-4'>
+    <div className='absolute top-8 right-3'>
       <div>
         <aside className='flex items-center gap-5 border-solid bg-white w-52 h-14 rounded-full p-1 border-2 mr-10'>
           <Image className='rounded-full'

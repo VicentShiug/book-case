@@ -4,17 +4,16 @@ import { ArrowDown } from '@/icons/Icons';
 import React, { useState } from 'react'
 
 export default function SearchBar () {
-  const {searchedBook, setSearchedBook} = useAuthContext()
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const { setSearchedBook } = useAuthContext()
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
   const handleClickDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
   };
 
-  const handleSearch = async (e) => { 
+  const handleSearch = async (e) => {
     const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${e.target.value}`);
     const data = await response.json();
     setSearchedBook(data.items);
-    console.log(searchedBook);
   }
   return (
     <>
@@ -33,7 +32,7 @@ export default function SearchBar () {
               <li className='block px-4 py-2 rounded-md hover:bg-gray-100 cursor-pointer'>Assuntos</li>
             </ul>
           </div>
-          <input onChange={(e) => {handleSearch(e)}} className='w-full ml-1 h-full rounded-e-full outline-none px-4' placeholder='Search' />
+          <input onChange={(e) => { handleSearch(e) }} className='w-full ml-1 h-full rounded-e-full outline-none px-4' placeholder='Search' />
         </div>
       </div>
     </>

@@ -11,7 +11,7 @@ import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
 
 export default function Home () {
   const router = useRouter()
-  const { user, setUser, token, setBooksToRead, setBooksReading, setReadBooks } = useAuthContext()
+  const { user, setUser, token, setBooksToRead, setBooksReading, setReadBooks, setBooksInShelf, booksReading, booksToRead, readBooks } = useAuthContext()
 
 
   useEffect(() => {
@@ -30,6 +30,8 @@ export default function Home () {
     })
 
     UseGetAllStateBooks({ user, setBooksReading, setBooksToRead, setReadBooks })
+    setBooksInShelf([...booksReading, ...booksToRead, ...readBooks])
+
   }, [])
 
   return (

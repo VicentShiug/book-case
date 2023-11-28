@@ -17,7 +17,6 @@ export default function BookItem ({book}) {
           <h3 className='text-gray-900 text-xs text-left font-semibold mb-1'>{book.volumeInfo.title}</h3>
           <p className='text-xs font-light'>{book.volumeInfo?.authors[0]}, {book.volumeInfo.publishedDate?.slice(0, 4)}</p>
           <span className='text-xs'> {book.volumeInfo.averageRating ? Math.floor(book.volumeInfo.averageRating).toFixed(1)  : '-'} / <span className='text-gray-400'>5</span> </span>
-          {console.log(book)}
         </div>
       </div>
     </div>

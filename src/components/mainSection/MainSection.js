@@ -24,9 +24,7 @@ export default function MainSection () {
           <h1 className='text-2xl text-gray-500 p-10'>Livros à ler</h1>
           <BooksList className='pb-10' books={booksToRead} />
         </>}
-      <div className='relative'>
-        <Profile />
-      </div>
+      <Profile />
     </div>
   )
 }
