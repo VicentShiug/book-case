@@ -15,13 +15,18 @@ export default function Search () {
       <Sidebar />
       <div className='flex flex-col w-full'>
         <SearchBar />
-        <div className='flex pl-11 pt-40 mb-6'>
-          <h1 className='text-gray-600 font-medium text-xl xl:mr-80 md:mr-10'>Título</h1>
-          <h1 className='text-gray-600 font-medium text-xl xl:mr-16 md:mr-10'>Avaliação</h1>
-          <h1 className='text-gray-600 font-medium text-xl xl:mr-44 md:mr-10'>Categoria</h1>
-          <h1 className='text-gray-600 font-medium text-xl xl:mr-[102px] md:mr-10'>Disponibilidade</h1>
-          <h1 className='text-gray-600 font-medium text-xl'>Status</h1>
-        </div>
+        {searchedBook
+          ? <div className='flex pl-11 pt-40 mb-6'>
+            <h1 className='text-gray-600 font-medium text-xl xl:mr-80 md:mr-10'>Título</h1>
+            <h1 className='text-gray-600 font-medium text-xl xl:mr-16 md:mr-10'>Avaliação</h1>
+            <h1 className='text-gray-600 font-medium text-xl xl:mr-44 md:mr-10'>Categoria</h1>
+            <h1 className='text-gray-600 font-medium text-xl xl:mr-[102px] md:mr-10'>Disponibilidade</h1>
+            <h1 className='text-gray-600 font-medium text-xl'>Status</h1>
+          </div>
+          : <div className='flex pl-11 pt-40 mb-6'>
+            <h1 className='text-gray-600 font-medium text-xl m-auto'>Comece a pesquisar e aqui se preencherá :D</h1>
+            </div>
+        }
         {console.log(searchedBook)}
         {
           searchedBook?.map((book) => {
