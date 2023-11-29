@@ -33,8 +33,20 @@ export const useGetBooksReading = async ({ user, setBooksReading }) => {
   setBooksReading(data.items)
 }
 
-export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRead, setReadBooks }) => { 
+export const useGetFavorites = async ({ user, setFavoriteBooks }) => { 
+  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/volumes`;
+  const response = await fetch(urlVolume, {
+    headers: {
+      'Authorization': `Bearer ${user.accessToken}`
+    }
+  })
+  const data = await response.json()
+  setFavoriteBooks(data.items)
+}
+
+export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks }) => { 
   await useGetBooksReading({ user, setBooksReading })
   await useGetBooksToRead({ user, setBooksToRead })
   await useGetReadBooks({ user, setReadBooks })
+  await useGetFavorites({ user, setFavoriteBooks })
 }

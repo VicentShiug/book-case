@@ -14,6 +14,7 @@ export default function AuthContextProvider ({ children }) {
   const [readBooks, setReadBooks] = useState([])
   const [searchedBook, setSearchedBook] = useState([])
   const [booksInShelf, setBooksInShelf] = useState([])
+  const [favoriteBooks, setFavoriteBooks] = useState([])
 
   const setUserAndLog = (newUser) => {
     console.log("Setting new user:", newUser);
@@ -29,7 +30,8 @@ export default function AuthContextProvider ({ children }) {
       booksReading, setBooksReading,
       readBooks, setReadBooks,
       searchedBook, setSearchedBook,
-      booksInShelf, setBooksInShelf
+      booksInShelf, setBooksInShelf,
+      favoriteBooks, setFavoriteBooks,
     }}>
       {children}
     </AuthContext.Provider>
