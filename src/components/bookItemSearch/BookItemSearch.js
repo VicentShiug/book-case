@@ -20,7 +20,7 @@ export default function BookItemSearch ({ book, booksInShelf }) {
               className='rounded-xl shadow-xl !w-20 !h-24 flex items-center'
               alt='Book Image'
               unoptimized
-              src={volumeInfo?.imageLinks?.thumbnail}
+              src={volumeInfo?.imageLinks?.thumbnail || '../../../../png/book-cover-placeholder.png'}
               width={75}
               height={99}
               layout='responsive' />
@@ -45,10 +45,10 @@ export default function BookItemSearch ({ book, booksInShelf }) {
             <Availability saleInfo={saleInfo} />
           </div>
           <div className='w-28'>
-            <Statusbar bookId={id} booksInShelf={booksInShelf} />
+            <Statusbar bookId={id} />
           </div>
           <div className='w-11'>
-            <FavoriteButton />
+            <FavoriteButton bookId={id} />
           </div>
           <button
             className='border-solid border-2 border-orange-500 text-orange-500 rounded-md px-2 py-1'
