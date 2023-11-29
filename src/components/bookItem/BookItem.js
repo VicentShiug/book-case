@@ -9,7 +9,7 @@ export default function BookItem ({book}) {
           className='rounded-xl shadow-xl !w-32 !h-44'
           alt='livros'
           unoptimized
-          src={book.volumeInfo.imageLinks.thumbnail}
+          src={book.volumeInfo.imageLinks.thumbnail || '../../../../png/book-cover-placeholder.png'}
           width={50}
           height={50}
           layout='responsive' />
