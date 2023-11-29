@@ -5,16 +5,10 @@ import Profile from '@/components/profile/Profile'
 import SearchBar from '@/components/searchBar/SearchBar'
 import Sidebar from '@/components/sidebar/Sidebar'
 import { useAuthContext } from '@/context/AuthContext'
-import { UseGetAllStateBooks } from '@/hooks/useGetBooks'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export default function Search () {
-  const { user, readBooks, booksReading, booksToRead, setBooksReading, setBooksToRead, setReadBooks, searchedBook, booksInShelf } = useAuthContext()
-
-  useEffect(() => {
-    if (!user) return
-    UseGetAllStateBooks({ user, setBooksReading, setBooksToRead, setReadBooks })
-  })
+  const { searchedBook } = useAuthContext()
 
   return (
     <BackgroundArea>
@@ -25,15 +19,15 @@ export default function Search () {
           <h1 className='text-gray-600 font-medium text-xl xl:mr-80 md:mr-10'>Título</h1>
           <h1 className='text-gray-600 font-medium text-xl xl:mr-16 md:mr-10'>Avaliação</h1>
           <h1 className='text-gray-600 font-medium text-xl xl:mr-44 md:mr-10'>Categoria</h1>
-          <h1 className='text-gray-600 font-medium text-xl xl:mr-24 md:mr-10'>Disponibilidade</h1>
+          <h1 className='text-gray-600 font-medium text-xl xl:mr-[102px] md:mr-10'>Disponibilidade</h1>
           <h1 className='text-gray-600 font-medium text-xl'>Status</h1>
         </div>
-        {console.log(searchedBook && searchedBook[0])}
+        {console.log(searchedBook)}
         {
           searchedBook?.map((book) => {
             return (
               <div key={book.id}>
-                <BookItemSearch key={book?.id} book={book} booksInShelf={booksInShelf} />
+                <BookItemSearch key={book?.id} book={book} />
               </div>
             )
           }
