@@ -1,11 +1,5 @@
-'use client'
-import { useAuthContext } from '@/context/AuthContext'
 import React from 'react'
-
-export default function Statusbar ({ bookId }) {
-  const { booksInShelf, booksReading, booksToRead, readBooks, favoriteBooks, } = useAuthContext()
-  const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);
+export default function Statusbar ({ bookId, booksInShelf, booksReading, booksToRead, readBooks  }) {
 
   const status = booksReading?.find((book) => book.id === bookId)
     ? 'Lendo' : booksToRead?.find((book) => book.id === bookId)

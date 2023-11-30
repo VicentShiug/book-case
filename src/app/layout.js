@@ -14,13 +14,13 @@ export default function RootLayout ({ children }) {
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
-        <AuthContextProvider>
-          <div className="w-screen h-screen bg-bg bg-no-repeat bg-right p-9 pb-10 bg-white fill-slate-600">
-            <div className="w-full h-full ">
+          <AuthContextProvider>
+            <div className="w-screen h-screen bg-bg bg-no-repeat bg-right p-9 pb-10 bg-white fill-slate-600">
+              <div className="w-full h-full ">
                 {children}
+              </div>
             </div>
-          </div>
-        </AuthContextProvider>
+          </AuthContextProvider>
       </body>
     </html>
   )

@@ -78,4 +78,21 @@ const SearchInBarIcon = () => {
   )
 }
 
-export { HomeIcon, SearchIcon, FavIcon, ArrowDown, CheckBullet, XBullet, MarkedHearthIcon, UnMarkedHearthIcon, BackArrowIcon, SearchInBarIcon }
+const StarIconOutline = () => {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"  stroke="#FFCB45" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7.00002 0L9.37945 4.05683L14 5.05044L10.85 8.55131L11.3263 13.2222L7.00002 11.3291L2.67379 13.2222L3.15002 8.55131L2.41399e-05 5.05044L4.62059 4.05683L7.00002 0Z" fill="none" />
+    </svg>
+  )
+
+}
+
+const StarIconFill = () => {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7.00002 0L9.37945 4.05683L14 5.05044L10.85 8.55131L11.3263 13.2222L7.00002 11.3291L2.67379 13.2222L3.15002 8.55131L2.41399e-05 5.05044L4.62059 4.05683L7.00002 0Z" fill="#FFCB45" />
+    </svg>
+  )
+}
+
+export { HomeIcon, SearchIcon, FavIcon, ArrowDown, CheckBullet, XBullet, MarkedHearthIcon, UnMarkedHearthIcon, BackArrowIcon, SearchInBarIcon, StarIconOutline, StarIconFill }

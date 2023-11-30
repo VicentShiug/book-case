@@ -6,10 +6,10 @@ export default function Availability ({saleInfo}) {
     <div className='flex gap-2 items-center'>
       <div className='flex flex-col gap-2'>
       {
-        saleInfo.saleability === 'FOR_SALE' ? <CheckBullet /> : <XBullet />
+        saleInfo?.saleability === 'FOR_SALE' ? <CheckBullet /> : <XBullet />
         }
         {
-        saleInfo.isEbook ? <CheckBullet />  : <XBullet />
+        saleInfo?.isEbook ? <CheckBullet />  : <XBullet />
         }
         {/* <CheckBullet />
         <XBullet />

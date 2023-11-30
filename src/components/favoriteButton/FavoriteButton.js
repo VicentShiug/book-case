@@ -7,7 +7,7 @@ import React from 'react'
 export default function FavoriteButton ({ bookId }) {
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
-  const { user, favoriteBooks, setFavoriteBooks, } = useAuthContext()
+  const { user, favoriteBooks, setFavoriteBooks } = useAuthContext()
   const iconInShelf = favoriteBooks?.find((book) => book.id === bookId) ? <MarkedHearthIcon /> : <UnMarkedHearthIcon />
   const isFavorite = favoriteBooks?.find((book) => book.id === bookId)
   return (

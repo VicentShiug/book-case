@@ -44,6 +44,15 @@ export const useGetFavorites = async ({ user, setFavoriteBooks }) => {
   setFavoriteBooks(data.items)
 }
 
+export const onGetABook = async ({ id }) => { 
+  const cors = 'https://cors-anywhere.herokuapp.com/';
+  const urlVolume = `https://www.googleapis.com/books/v1/volumes/${id}`;
+
+  const response = await fetch(cors + urlVolume);
+  const data = await response.json();
+  return data
+}
+
 export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks }) => { 
   await useGetBooksReading({ user, setBooksReading })
   await useGetBooksToRead({ user, setBooksToRead })
