@@ -1,15 +1,12 @@
-'use client'
 import Image from 'next/image'
 import React from 'react'
 import Availability from '../availability/Availability'
 import Statusbar from '../statusbar/Statusbar'
 import FavoriteButton from '../favoriteButton/FavoriteButton'
 import { useRouter } from 'next/navigation'
-import { useAuthContext } from '@/context/AuthContext'
 
 export default function BookItemSearch ({ book }) {
   const router = useRouter()
-  const { booksInShelf, booksReading, booksToRead, readBooks } = useAuthContext()
   const { id, volumeInfo, saleInfo } = book
   return (
     <div key={id} className='flex w-auto flex-shrink-0 h-32 mr-11 p-4 rounded-xl bg-white overflow-hidden ml-11 mb-6'>
@@ -48,7 +45,7 @@ export default function BookItemSearch ({ book }) {
             <Availability saleInfo={saleInfo} />
           </div>
           <div className='w-28'>
-            <Statusbar bookId={id} booksInShelf={booksInShelf} booksReading={booksReading} booksToRead={booksToRead} readBooks={readBooks} />
+            <Statusbar bookId={id} />
           </div>
           <div className='w-11'>
             <FavoriteButton bookId={id} />

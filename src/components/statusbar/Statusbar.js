@@ -1,12 +1,19 @@
+'use client'
+import { useAuthContext } from '@/context/AuthContext'
+import { usePathname } from 'next/navigation'
 import React from 'react'
-export default function Statusbar ({ bookId, booksInShelf, booksReading, booksToRead, readBooks  }) {
+export default function Statusbar ({ bookId }) {
+  const pathname = usePathname()
 
+  const { booksReading, booksToRead, readBooks } = useAuthContext()
   const status = booksReading?.find((book) => book.id === bookId)
     ? 'Lendo' : booksToRead?.find((book) => book.id === bookId)
       ? 'À ler' : readBooks?.find((book) => book.id === bookId)
         ? 'Lido' : null
 
-  const onShelf = booksInShelf?.find((book) => book.id === bookId)
+  const onShelf = booksReading?.find((book) => book.id === bookId)
+    || booksToRead?.find((book) => book.id === bookId)
+    || readBooks?.find((book) => book.id === bookId)
     ? 'Na estante' : 'Não salvo'
 
   return (
@@ -17,7 +24,7 @@ export default function Statusbar ({ bookId, booksInShelf, booksReading, booksTo
         </p>
       </span>
 
-      {status &&
+      {status && pathname !== '/preview' &&
         <span className='w-20 h-7 rounded-md bg-amber-600 flex justify-center items-center center text-white'>
           <p className='text-sm font-normal'>
             {status}
