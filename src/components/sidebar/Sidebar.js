@@ -9,15 +9,13 @@ export default function Sidebar () {
 
   const pathname = usePathname()
   useEffect(() => {
-    // Atualize a opção selecionada com base na rota atual
-    console.log(pathname)
     const currentPath = pathname;
     if (currentPath === '/') {
       setSelectedOption('Inicio');
     } else if (currentPath === '/search') {
       setSelectedOption('Pesquisar');
-    } else if (currentPath === '#') {
-      setSelectedOption('Favoritos');
+    } else if (currentPath === '/preview') {
+      setSelectedOption('Pesquisar');
     }
   }, [pathname]);
 

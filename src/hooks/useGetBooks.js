@@ -45,10 +45,9 @@ export const useGetFavorites = async ({ user, setFavoriteBooks }) => {
 }
 
 export const onGetABook = async ({ id }) => { 
-  const cors = 'https://cors-anywhere.herokuapp.com/';
   const urlVolume = `https://www.googleapis.com/books/v1/volumes/${id}`;
 
-  const response = await fetch(cors + urlVolume);
+  const response = await fetch(urlVolume);
   const data = await response.json();
   return data
 }
