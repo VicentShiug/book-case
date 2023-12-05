@@ -1,4 +1,7 @@
 'use client';
+import PrivateRoute from "@/components/privateRoute/PrivateRoute";
+import { checkIsPublicRoute } from "@/functions/checkIsPublicRoute";
+import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
 
@@ -18,6 +21,9 @@ export default function AuthContextProvider ({ children }) {
   const [onShelf, setOnShelf] = useState('Não salvo')
   const [isLoading, setIsLoading] = useState(false)
 
+  const pathName = usePathname()
+  const isPublicRoute = checkIsPublicRoute(pathName);
+
   return (
     <AuthContext.Provider value={{
       user, setUser,
@@ -32,7 +38,8 @@ export default function AuthContextProvider ({ children }) {
       onShelf, setOnShelf,
       isLoading, setIsLoading
     }}>
-      {children}
+      {isPublicRoute && children}
+      {!isPublicRoute && <PrivateRoute>{children}</PrivateRoute>}
     </AuthContext.Provider>
   )
 }
