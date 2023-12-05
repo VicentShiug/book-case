@@ -13,7 +13,7 @@ export default function BooksList ({ books, className }) {
       {
         books?.length > 0 &&
         <div ref={ref} className='flex overflow-auto overscroll-auto scroll-smooth relative scrollbar-thin scrollbar-thumb-blue-gray-50' >
-          <div className={'flex flex-row gap-10 ml-10  ' + className}>
+          <div className={'flex flex-row gap-10 ml-10 mr-10 ' + className}>
             {
               books?.map(book => {
                 return (

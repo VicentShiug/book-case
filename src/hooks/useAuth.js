@@ -1,6 +1,7 @@
 import { AuthContext } from '@/context/AuthContext'
 import { auth } from '@/service/firebase'
 import { useRouter } from 'next/navigation'
+import { setCookie } from 'nookies'
 import React, { useContext } from 'react'
 
 export default function useAuth () {
@@ -13,6 +14,10 @@ export const useLogout = () => {
   return () => {
     auth.signOut()
     router.push('/login')
+    setCookie(null, 'user', '', {
+      maxAge: 86400 * 1, // 1 day 
+      path: '/',
+    })
     setUser(null)
     setToken(null)
   }
