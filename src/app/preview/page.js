@@ -81,7 +81,6 @@ export default function Preview ({ searchParams }) {
       <Profile />
       <Sidebar />
 
-      {/* <SearchBar /> */}
       <div className='w-full h-full pt-40 pl-11 flex gap-20'>
         <div className='flex flex-col'>
           <button onClick={() => router.back()} className='flex gap-2 items-center text-gray-700'> {<BackArrowIcon />}Voltar para resultados</button>

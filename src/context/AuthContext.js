@@ -16,15 +16,11 @@ export default function AuthContextProvider ({ children }) {
   const [booksInShelf, setBooksInShelf] = useState([])
   const [favoriteBooks, setFavoriteBooks] = useState([])
   const [onShelf, setOnShelf] = useState('Não salvo')
-
-  const setUserAndLog = (newUser) => {
-    console.log("Setting new user:", newUser);
-    setUser(newUser);
-  };
+  const [isLoading, setIsLoading] = useState(false)
 
   return (
     <AuthContext.Provider value={{
-      user, setUser: setUserAndLog,
+      user, setUser,
       token, setToken,
       book, setBook,
       booksToRead, setBooksToRead,
@@ -33,7 +29,8 @@ export default function AuthContextProvider ({ children }) {
       searchedBook, setSearchedBook,
       booksInShelf, setBooksInShelf,
       favoriteBooks, setFavoriteBooks,
-      onShelf, setOnShelf
+      onShelf, setOnShelf,
+      isLoading, setIsLoading
     }}>
       {children}
     </AuthContext.Provider>

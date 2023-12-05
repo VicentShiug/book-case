@@ -20,10 +20,10 @@ import { parseCookies } from "nookies";
 
 
 export default function Home () {
-  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks } = useAuthContext()
+  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
 
-  const loadData = async() => {
+  const loadData = async () => {
     setIsClient(true)
     const userLoad = user ? user : JSON.parse(parseCookies().user)
     if (token || userLoad) {
@@ -32,7 +32,8 @@ export default function Home () {
   }
 
   useEffect(() => {
-    loadData()
+    setIsLoading(true)
+    loadData().then(() => setIsLoading(false))
   }, [])
 
   return (

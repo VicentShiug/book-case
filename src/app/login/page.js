@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import LoginGoogleButton from '@/components/loginGoogleButton/LoginGoogleButton';
 import { setCookie } from 'nookies';
-
+import Loading from '../loading';
+import Skeleton from 'react-loading-skeleton';
 export default function Login () {
   const router = useRouter()
   const { token, setToken, setUser, user } = useAuthContext()
@@ -56,6 +57,7 @@ export default function Login () {
           <LoginGoogleButton onClick={() => handleClickButtonLogin()} />
         </div>
       </div>
+      {/* <Loading /> */}
     </>
   )
 }
