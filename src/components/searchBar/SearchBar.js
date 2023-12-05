@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 export default function SearchBar() {
   const [search, setSearch] = useState('');
-  const { setSearchedBook } = useAuthContext();
+  const { setSearchedBook, setIsLoading } = useAuthContext();
   const [selectedOption, setSelectedOption] = useState('Todos'); // Estado para armazenar a opção selecionada
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -16,9 +16,11 @@ export default function SearchBar() {
   };
 
   const handleSearch = async () => {
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`);
+    setIsLoading(true)
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${search}`)
     const data = await response.json();
     setSearchedBook(data.items);
+    setIsLoading(false)
   };
 
   const handleSearchInBar = (e) => {
