@@ -1,11 +1,13 @@
 'use client';
 import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthContext } from "@/context/AuthContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import MainSection from "@/components/mainSection/MainSection";
 import { UseGetAllStateBooks } from "@/hooks/useGetBooks";
 import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
+import { auth } from "@/service/firebase";
+import { parseCookies } from "nookies";
 
 //  0 = Favorite
 //  1 = Purchased
@@ -17,25 +19,36 @@ import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
 //  7 = My Google eBooks
 //  8 = Books for you
 //  9 = Browsing history
-
+import dynamic from 'next/dynamic'
+ 
 
 export default function Home () {
   const router = useRouter()
-  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks } = useAuthContext()
-
+  const { user,setUser, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks } = useAuthContext()
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    if (!token) {
-      router.push('/login')
-      return
+    setIsClient(true)
+    if (token) {
+      return UseGetAllStateBooks({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
     }
-    UseGetAllStateBooks({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
+    
+    const userCookie = JSON.parse(parseCookies().user)
+    setUser(userCookie)
+    if (userCookie) {
+      UseGetAllStateBooks({ user: userCookie, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
+    }
+
   }, [])
 
   return (
-    <BackgroundArea>
-      <Sidebar />
-      <MainSection />
-    </BackgroundArea>
+    <>
+      {isClient ?
+        <BackgroundArea>
+          <Sidebar />
+          <MainSection />
+        </BackgroundArea>
+      : null}
+    </>
   )
 }

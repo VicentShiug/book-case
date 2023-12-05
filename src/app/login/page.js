@@ -5,10 +5,11 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 import LoginGoogleButton from '@/components/loginGoogleButton/LoginGoogleButton';
+import { setCookie } from 'nookies';
 
 export default function Login () {
   const router = useRouter()
-  const { token, setToken, setUser } = useAuthContext()
+  const { token, setToken, setUser, user } = useAuthContext()
   useEffect(() => {
     token && router.push('/')
   }, [])
@@ -24,11 +25,22 @@ export default function Login () {
       const { displayName, photoURL, uid } = result.user
       const accessToken = result._tokenResponse.oauthAccessToken
       setToken(accessToken)
+      console.log(result)
       setUser({
         id: uid,
         name: displayName,
         avatar: photoURL,
         accessToken: accessToken
+      })
+      const userCookie = {
+        id: uid,
+        name: displayName,
+        avatar: photoURL,
+        accessToken: accessToken
+      }
+      setCookie(null, 'user', JSON.stringify(userCookie), {
+        maxAge: 3600 * 1, // 1 hour 
+        path: '/',
       })
       router.push('/')
     }
