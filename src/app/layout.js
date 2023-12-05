@@ -1,10 +1,11 @@
 'use client'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import AuthContextProvider from '@/context/AuthContext'
+import AuthContextProvider, { useAuthContext } from '@/context/AuthContext'
 import { usePathname } from 'next/navigation'
 import { checkIsPublicRoute } from '@/functions/checkIsPublicRoute'
 import PrivateRoute from '@/components/privateRoute/PrivateRoute'
+import { useEffect } from 'react'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,6 +16,7 @@ export default function RootLayout ({ children }) {
   const pathName = usePathname()
   const isPublicRoute = checkIsPublicRoute(pathName);
 
+  
 
   return (
     <html lang="en">

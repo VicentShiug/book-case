@@ -2,11 +2,9 @@
 import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthContext } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import MainSection from "@/components/mainSection/MainSection";
 import { UseGetAllStateBooks } from "@/hooks/useGetBooks";
 import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
-import { auth } from "@/service/firebase";
 import { parseCookies } from "nookies";
 
 //  0 = Favorite
@@ -19,26 +17,22 @@ import { parseCookies } from "nookies";
 //  7 = My Google eBooks
 //  8 = Books for you
 //  9 = Browsing history
-import dynamic from 'next/dynamic'
- 
+
 
 export default function Home () {
-  const router = useRouter()
-  const { user,setUser, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks } = useAuthContext()
+  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
 
-  useEffect(() => {
+  const loadData = async() => {
     setIsClient(true)
-    if (token) {
-      return UseGetAllStateBooks({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
+    const userLoad = user ? user : JSON.parse(parseCookies().user)
+    if (token || userLoad) {
+      return UseGetAllStateBooks({ user: userLoad, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
     }
-    
-    const userCookie = JSON.parse(parseCookies().user)
-    setUser(userCookie)
-    if (userCookie) {
-      UseGetAllStateBooks({ user: userCookie, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
-    }
+  }
 
+  useEffect(() => {
+    loadData()
   }, [])
 
   return (
@@ -48,7 +42,7 @@ export default function Home () {
           <Sidebar />
           <MainSection />
         </BackgroundArea>
-      : null}
+        : null}
     </>
   )
 }
