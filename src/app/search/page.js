@@ -16,7 +16,7 @@ export default function Search () {
       <Sidebar />
       <div className='flex flex-col w-full'>
         <SearchBar />
-        {searchedBook.length > 0 || isLoading
+        {searchedBook?.length > 0 || isLoading
           ? <div className='flex pl-11 pt-40 mb-6'>
             <h1 className='text-gray-600 font-medium text-xl xl:mr-80 md:mr-10'>Título</h1>
             <h1 className='text-gray-600 font-medium text-xl xl:mr-16 md:mr-10'>Avaliação</h1>
