@@ -21,6 +21,8 @@ export default function Preview () {
     isLoading, setIsLoading
   } = useAuthContext()
 
+  const [isLoadingRequest, setIsLoadingRequest] = React.useState(false)
+
   const { get } = useSearchParams()
   const id = get('id')
 
@@ -53,26 +55,34 @@ export default function Preview () {
     || imageLinks?.smallThumbnail
     || '/png/book-cover-placeholder.png'
 
-  console.log(imageLinks)
   const removeBook = async () => {
     await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
     await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
     await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
   }
   const handleChangeStateBook = async (e) => {
-    if (e.target.value === 'toRead') {
-      await removeBook()
-      return await onAddBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+    setIsLoadingRequest(true)
+    try {
+      if (e.target.value === 'toRead') {
+        await removeBook()
+        return await onAddBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+      }
+      if (e.target.value === 'reading') {
+        await removeBook()
+        return await onAddBookReading({ user, bookId: id, setBooksReading, booksReading })
+      }
+      if (e.target.value === 'read') {
+        await removeBook()
+        return await onAddBookRead({ user, bookId: id, setReadBooks, readBooks })
+      }
+      if (e.target.value === '#') {
+        return await removeBook()
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoadingRequest(false)
     }
-    if (e.target.value === 'reading') {
-      await removeBook()
-      return await onAddBookReading({ user, bookId: id, setBooksReading, booksReading })
-    }
-    if (e.target.value === 'read') {
-      await removeBook()
-      return await onAddBookRead({ user, bookId: id, setReadBooks, readBooks })
-    }
-
   }
 
 
@@ -97,8 +107,7 @@ export default function Preview () {
           <div className='flex flex-col'>
             <button onClick={() => router.back()} className='flex gap-2 items-center text-gray-700'> {<BackArrowIcon />}Voltar para resultados</button>
             <div className=' flex flex-col gap-7 w-72 h-96 bg-white rounded-xl mt-5 items-center justify-center'>
-                <div className='!w-52 !h-72'>
-                  
+              <div className='!w-52 !h-72'>
                 <Image
                   alt='book cover'
                   src={image.replace('http', 'https')}
@@ -145,12 +154,21 @@ export default function Preview () {
               </div>
               {/* Select status livro */}
               <div className='ml-10 '>
-                <select defaultValue={status || '#'} value={status} onChange={(e) => { handleChangeStateBook(e) }} className="outline-none bg-gray-800 border border-gray-300 text-white  rounded-lg  block w-full py-2.5 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option value='#'>Adicionar a Lista</option>
-                  <option value="reading">Lendo</option>
-                  <option value="toRead">À ler</option>
-                  <option value="read">Lido</option>
-                </select>
+                {
+                  isLoadingRequest
+                    ? <button className='bg-gray-800 text-white rounded-lg px-4 py-2'>Carregando...</button>
+                    :
+                      <select
+                        defaultValue={status || '#'}
+                        value={status}
+                        onChange={(e) => { handleChangeStateBook(e) }}
+                        className="outline-none bg-gray-800 border text-white rounded-lg  block w-full py-2.5 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                      <option value='#'>{status == '#' ? 'Adicionar a Lista' : 'Remover da lista'} </option>
+                      <option value="reading">Lendo</option>
+                      <option value="toRead">À ler</option>
+                      <option value="read">Lido</option>
+                    </select>
+                }
               </div>
             </div>
             <div className='flex flex-col gap-4 w-10/12'>
