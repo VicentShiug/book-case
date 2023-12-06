@@ -8,7 +8,7 @@ export default function BookItem ({ book }) {
     <>
       {
         book &&
-        <div key={id} className='flex w-40 p-4 rounded-xl bg-white h-72 overflow-hidden'>
+        <div key={id} className='flex w-40 p-4 rounded-xl bg-white h-72 overflow-hidden transition-all hover:scale-105 hover:bg-blue-gray-100'>
           <div className='flex flex-col'>
             <Image
               className='rounded-xl shadow-xl !w-32 !h-44'

@@ -10,22 +10,19 @@ export default function MainSection () {
 
   return (
     <div className='w-full bg relative overflow-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-50'>
-      <div className=''>
-        <h1 className='text-2xl text-gray-700 p-10'>Livros já lidos</h1>
-        {readBooks
-          ? isLoading ? <SkeletonBookItem count={7} /> : <BooksList books={readBooks} />
-          : <h1 className='text-2xl text-gray-500 p-10'>Poxa, parece que não há livros lidos</h1>
-        }
-      </div>
-      <h1 className='text-2xl text-gray-700 p-10'>Livros que estou lendo</h1>
+      <h1 className='text-2xl text-gray-700 mt-10 ml-10'>Livros que estou lendo</h1>
       {booksReading
-        ?  isLoading ? <SkeletonBookItem count={7} /> : <BooksList books={booksReading} />
-        : <h1 className='text-2xl text-gray-500 p-10'>Poxa, parece que não há livros que estão sendo lidos</h1>}
-      <h1 className='text-2xl text-gray-700 p-10'>Livros à ler</h1>
-      {
-        booksToRead
-          ?  isLoading ? <SkeletonBookItem count={7} /> : <BooksList className='pb-10' books={booksToRead} />
-          : <h1 className='text-2xl text-gray-500 p-10'>Poxa, parece que não há livros à ler</h1>}
+        ? isLoading ? <SkeletonBookItem count={7} /> : <BooksList books={booksReading} />
+        : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Poxa, parece que não há livros que estão sendo lidos</h1>}
+      <h1 className='text-2xl text-gray-700 mt-10 ml-10'>Livros à ler</h1>
+      {booksToRead
+        ? isLoading ? <SkeletonBookItem count={7} /> : <BooksList books={booksToRead} />
+        : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Poxa, parece que não há livros à ler</h1>}
+      <h1 className='text-2xl text-gray-700 mt-10 ml-10'>Livros já lidos</h1>
+      {readBooks
+        ? isLoading ? <SkeletonBookItem count={7} /> : <BooksList books={readBooks} />
+        : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Poxa, parece que não há livros lidos</h1>
+      }
       <Profile />
     </div>
   )
