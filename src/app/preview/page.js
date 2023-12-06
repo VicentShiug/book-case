@@ -9,18 +9,18 @@ import { onGetABook } from '@/hooks/useGetBooks';
 import { onAddBookRead, onAddBookReading, onAddBookToRead, onRemoveBookRead, onRemoveBookReading, onRemoveBookToRead } from '@/hooks/useSaveBook';
 import { BackArrowIcon, StarIconFill } from '@/icons/Icons';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react'
 
-export default function Preview ({ searchParams }) {
+export default function Preview () {
   const { book, setBook, user,
     setBooksToRead, booksToRead,
     setBooksReading, booksReading,
     setReadBooks, readBooks,
   } = useAuthContext()
 
-  const { id } = searchParams
-  console.log(searchParams)
+  const { get } = useSearchParams()
+  const id = get('id')
 
   useEffect(() => {
     const getBook = async () => {
