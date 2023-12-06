@@ -156,7 +156,7 @@ export default function Preview () {
               <div className='ml-10 '>
                 {
                   isLoadingRequest
-                    ? <button className='bg-gray-800 text-white rounded-lg px-4 py-2'>Carregando...</button>
+                    ? <button className='bg-gray-800 text-white rounded-lg px-4 py-2'>Atualizando...</button>
                     :
                       <select
                         defaultValue={status || '#'}
