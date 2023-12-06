@@ -26,7 +26,6 @@ export default function Login () {
       const { displayName, photoURL, uid } = result.user
       const accessToken = result._tokenResponse.oauthAccessToken
       setToken(accessToken)
-      console.log(result)
       setUser({
         id: uid,
         name: displayName,
