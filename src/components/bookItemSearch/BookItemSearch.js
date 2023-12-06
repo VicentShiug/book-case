@@ -14,7 +14,7 @@ export default function BookItemSearch ({ book }) {
         <div className='p-1 mt-2 flex gap-10 items-center' >
           <div
             className='flex cursor-pointer items-center'
-            onClick={() => router.push(`/preview/?id=${book.id}`)}
+            onClick={() => router.push(`/preview/?id=${id}`)}
           >
             <Image
               className='rounded-xl shadow-xl !w-20 !h-24 flex items-center'

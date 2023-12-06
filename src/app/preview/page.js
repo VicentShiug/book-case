@@ -1,18 +1,14 @@
 'use client';
-
 import Availability from '@/components/availability/Availability';
 import BackgroundArea from '@/components/backgroundArea/BackgroundArea';
 import Profile from '@/components/profile/Profile';
-import SearchBar from '@/components/searchBar/SearchBar';
 import Sidebar from '@/components/sidebar/Sidebar';
 import Statusbar from '@/components/statusbar/Statusbar';
 import { useAuthContext } from '@/context/AuthContext';
 import { onGetABook } from '@/hooks/useGetBooks';
 import { onAddBookRead, onAddBookReading, onAddBookToRead, onRemoveBookRead, onRemoveBookReading, onRemoveBookToRead } from '@/hooks/useSaveBook';
-import { ArrowDown, BackArrowIcon, StarIconFill, StarIconOutline } from '@/icons/Icons';
-import { Select, Option, Button } from '@material-tailwind/react';
+import { BackArrowIcon, StarIconFill } from '@/icons/Icons';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
@@ -22,8 +18,9 @@ export default function Preview ({ searchParams }) {
     setBooksReading, booksReading,
     setReadBooks, readBooks,
   } = useAuthContext()
-  const [value, setValue] = React.useState(null)
+
   const { id } = searchParams
+  console.log(searchParams)
 
   useEffect(() => {
     const getBook = async () => {
