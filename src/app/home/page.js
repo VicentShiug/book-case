@@ -1,11 +1,11 @@
+import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
+import Sidebar from "@/components/sidebar/Sidebar";
 
 export default function Home() {
   return (
-    <>
-      <div style={{display: 'flex', flexDirection: 'row'}}>
-      <h1>home</h1>
-      </div>
-    </>
+    <BackgroundArea>
+      <Sidebar />
+    </BackgroundArea>
 
   )
 }

@@ -25,7 +25,7 @@ export default function Search () {
             <h1 className='text-gray-600 font-medium text-xl'>Status</h1>
           </div>
           : <div className='flex pl-11 pt-40 mb-6'>
-            <h1 className='text-gray-600 font-medium text-xl m-auto'>Comece a pesquisar e aqui se preencherá :D</h1>
+            <h1 className='text-gray-600 font-medium text-xl m-auto'>Comece a pesquisar !</h1>
             </div>
         }
         {

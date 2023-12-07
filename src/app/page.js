@@ -3,7 +3,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import { useAuthContext } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import MainSection from "@/components/mainSection/MainSection";
-import { UseGetAllStateBooks } from "@/hooks/useGetBooks";
+import { UseGetAllStateBooks, onGetAllBooks } from "@/hooks/useGetBooks";
 import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
 import { parseCookies } from "nookies";
 
@@ -20,20 +20,23 @@ import { parseCookies } from "nookies";
 
 
 export default function Home () {
-  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading } = useAuthContext()
+  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading, setBooksInShelf } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
-
+  console.log('atualizou')
   const loadData = async () => {
-    setIsClient(true)
     const userLoad = user ? user : JSON.parse(parseCookies().user)
     if (token || userLoad) {
-      return UseGetAllStateBooks({ user: userLoad, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks })
+      UseGetAllStateBooks({ user: userLoad, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks, setBooksInShelf })
+      setIsClient(true)
     }
   }
 
+
+
   useEffect(() => {
     setIsLoading(true)
-    loadData().then(() => setIsLoading(false))
+    loadData()
+    setIsLoading(false)
   }, [])
 
   return (
