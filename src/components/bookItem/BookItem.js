@@ -8,10 +8,10 @@ export default function BookItem ({ book }) {
     <>
       {
         book &&
-        <div key={id} className='flex w-40 p-4 rounded-xl bg-white h-72 overflow-hidden transition-all hover:scale-105 hover:bg-blue-gray-100'>
+        <div key={id} className='flex sm:w-40 h-72 w-32  p-4 rounded-xl bg-white  overflow-hidden transition-all hover:scale-105 hover:bg-blue-gray-100'>
           <div className='flex flex-col'>
             <Image
-              className='rounded-xl shadow-xl !w-32 !h-44'
+              className='rounded-xl shadow-xl sm:!w-32 sm:!h-44 !w-24 '
               alt='livros'
               unoptimized
               src={imageLinks?.thumbnail || '../../../../png/book-cover-placeholder.png'}

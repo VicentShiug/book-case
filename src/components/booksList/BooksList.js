@@ -8,14 +8,14 @@ export default function BooksList ({ books, className }) {
   return (
     <>
       {books?.length > 0 &&
-        <div className='flex w-full py-10' >
-          <div className={'flex flex-wrap gap-10 ml-10 mr-10 shrink' + className}>
+        <div className='flex w-full py-10 ' >
+          <div className={'flex flex-wrap sm:gap-10 sm:mx-10 gap-4 mx-3 shrink' + className}>
             {
               books?.map(book => {
                 return (
                   <div
                     key={book.id}
-                    className='flex cursor-pointer items-center'
+                    className='flex cursor-pointer items-center mx-auto'
                     onClick={() => router.push(`/preview/?id=${book.id}`)}
                   >
                     <BookItem book={book} key={book.id} />
