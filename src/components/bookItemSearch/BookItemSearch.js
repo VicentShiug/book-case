@@ -9,15 +9,15 @@ export default function BookItemSearch ({ book }) {
   const router = useRouter()
   const { id, volumeInfo, saleInfo } = book
   return (
-    <div key={id} className='flex w-auto flex-shrink-0 h-32 mr-11 p-4 rounded-xl bg-white overflow-hidden ml-11 mb-6'>
-      <div className='flex'>
-        <div className='p-1 mt-2 flex gap-10 items-center' >
+    <div key={id} className='flex w-auto flex-shrink-0 sm:h-32 h-28  sm:p-4 p-1 rounded-xl bg-white overflow-hidden sm:mx-11 mx-3 sm:mb-6 mb-3'>
+      <div className='flex '>
+        <div className='p-1 sm:mt-2 flex gap-10 items-center' >
           <div
             className='flex cursor-pointer items-center'
             onClick={() => router.push(`/preview/?id=${id}`)}
           >
             <Image
-              className='rounded-xl shadow-xl !w-20 !h-24 flex items-center'
+              className='rounded-xl shadow-xl sm:!w-20 sm:!h-24 !w-16 flex items-center'
               alt='Book Image'
               unoptimized
               src={volumeInfo?.imageLinks?.thumbnail || '../../../../png/book-cover-placeholder.png'}
@@ -25,10 +25,10 @@ export default function BookItemSearch ({ book }) {
               height={99}
               layout='responsive' />
             <div
-              className='ml-10 flex flex-col w-48 align-bottom cursor-pointer'
+              className='sm:ml-10 ml-5 flex flex-col w-48 align-bottom cursor-pointer'
             >
-              <h3 className='text-gray-800 text-xl text-left font-normal mb-1 mr-64 truncate w-52'>{volumeInfo.title}</h3>
-              <p className='text-base font-light'>{volumeInfo?.authors && volumeInfo?.authors[0]}, {volumeInfo.publishedDate?.slice(0, 4)}</p>
+              <h3 className='text-gray-800 sm:text-xl text-left font-normal mb-1 mr-64 truncate w-52'>{volumeInfo.title}</h3>
+              <p className='sm:text-base text-sm font-light'>{volumeInfo?.authors && volumeInfo?.authors[0]}, {volumeInfo.publishedDate?.slice(0, 4)}</p>
             </div>
           </div>
           <span className='text-base w-28 mr-3 text-center '> {volumeInfo.averageRating ? Math.floor(volumeInfo.averageRating).toFixed(1) : '-'}/<span className='text-gray-400'>5</span> </span>
