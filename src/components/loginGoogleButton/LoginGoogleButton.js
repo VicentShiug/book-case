@@ -8,7 +8,7 @@ export default function LoginGoogleButton ({ onClick, accept }) {
       <Tooltip content={!accept ? 'Necessário permitir o uso de cookies' : 'Fazer login'}>
         <button onClick={onClick}
           disabled={!accept}
-          className={`flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black relative ${!accept && 'border-gray-500 text-gray-500'}`}>
+          className={`flex items-center justify-center flex-none px-3 py-2 md:px-4 md:py-3 border-2 rounded-lg font-medium border-black text-xs relative ${!accept && 'border-gray-500 text-gray-500'}`}>
           <span className="mr-2">
             <GoogleLogo />
           </span>
