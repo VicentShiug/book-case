@@ -57,13 +57,13 @@ export default function Login () {
   return (
     <>
       <div className='flex items-center justify-center w-full h-full '>
-        <div className='flex flex-col bg-white sm:w-1/2 flex-shrink-0 rounded-lg p-20 items-center gap-10 shadow-2xl w-96 '>
+        <div className='flex flex-col bg-white sm:w-1/2 flex-shrink-0 rounded-lg p-20 items-center gap-10 shadow-2xl w-80 '>
           <h1 className='text-gray-700 sm:text-6xl text-4xl tracking-widest'>My <p className='text-orange-600 text-opacity-95'>Book</p>Shelf</h1>
           <p className='sm:text-2xl  text-gray-600'>Bem-vindo!</p>
           <p className='sm:text-1xl font-extralight text-gray-500'>Um lugar para organizar seus livros favoritos</p>
           <LoginGoogleButton accept={acceptCookies || accept} onClick={() => handleClickButtonLogin()} />
           {
-            acceptCookies
+            !acceptCookies
             && <div className='-my-5 text-xs sm:text-base'>
               <Checkbox
                 value={accept}
