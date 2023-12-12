@@ -93,6 +93,7 @@ export default function Preview () {
       ? 'reading' : readBooks?.find((book) => book.id === id)
         ? 'read' : '#'
 
+  console.log(averageRating)
   const router = useRouter()
   return (
     <BackgroundArea>
@@ -131,7 +132,7 @@ export default function Preview () {
             <div className='flex gap-3 items-center '>
               <div className='flex gap-1'>
                 {
-                  [...Array(averageRating)]?.map((star, index) => {
+                  [...Array(averageRating && parseInt(averageRating?.toFixed()))]?.map((star, index) => {
                     return (
                       <span key={index} className=''>{
                         <StarIconFill />
