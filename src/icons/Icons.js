@@ -22,7 +22,7 @@ const FavIcon = () => {
   )
 }
 
-const ArrowDown = ({color} ) => {
+const ArrowDown = ({ color }) => {
   return (
     <svg width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.17585 6.38027C6.79349 6.73088 6.20651 6.73088 5.82415 6.38027L1.03312 1.98704C0.360988 1.37072 0.797034 0.25 1.70896 0.25L11.291 0.25C12.203 0.25 12.639 1.37072 11.9669 1.98704L7.17585 6.38027Z" fill={color || '#4D4D4D'} />
@@ -80,7 +80,7 @@ const SearchInBarIcon = () => {
 
 const StarIconOutline = () => {
   return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"  stroke="#FFCB45" xmlns="http://www.w3.org/2000/svg">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FFCB45" xmlns="http://www.w3.org/2000/svg">
       <path d="M7.00002 0L9.37945 4.05683L14 5.05044L10.85 8.55131L11.3263 13.2222L7.00002 11.3291L2.67379 13.2222L3.15002 8.55131L2.41399e-05 5.05044L4.62059 4.05683L7.00002 0Z" fill="none" />
     </svg>
   )
@@ -95,4 +95,44 @@ const StarIconFill = () => {
   )
 }
 
-export { HomeIcon, SearchIcon, FavIcon, ArrowDown, CheckBullet, XBullet, MarkedHearthIcon, UnMarkedHearthIcon, BackArrowIcon, SearchInBarIcon, StarIconOutline, StarIconFill }
+const MenuIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
+  )
+}
+
+const MenuFourBarsIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+    </svg>
+  )
+}
+
+const XMarkIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  )
+}
+
+export {
+  HomeIcon,
+  SearchIcon,
+  FavIcon,
+  ArrowDown,
+  CheckBullet,
+  XBullet,
+  MarkedHearthIcon,
+  UnMarkedHearthIcon,
+  BackArrowIcon,
+  SearchInBarIcon,
+  StarIconOutline,
+  StarIconFill,
+  MenuIcon,
+  MenuFourBarsIcon,
+  XMarkIcon
+}
