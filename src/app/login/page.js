@@ -3,7 +3,7 @@ import { useAuthContext } from '@/context/AuthContext';
 import { auth } from '@/service/firebase';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoginGoogleButton from '@/components/loginGoogleButton/LoginGoogleButton';
 import { parseCookies, setCookie } from 'nookies';
 import { Checkbox } from '@material-tailwind/react';
@@ -12,10 +12,11 @@ export default function Login () {
   const { token, setToken, setUser } = useAuthContext()
 
   const [accept, setAccept] = React.useState(false)
+  const [isClient, setIsClient] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
-    // token && router.push('/')
+    setIsClient(true)
   }, [])
 
   const acceptCookies = parseCookies()?.acceptCookies
@@ -56,6 +57,7 @@ export default function Login () {
 
   return (
     <>
+      {isClient && 
       <div className='flex items-center justify-center w-full h-full '>
         <div className='flex flex-col bg-white sm:w-1/2 flex-shrink-0 rounded-lg p-20 items-center gap-10 shadow-2xl w-80 '>
           <h1 className='text-gray-700 sm:text-6xl text-4xl tracking-widest'>My <p className='text-orange-600 text-opacity-95'>Book</p>Shelf</h1>
@@ -74,7 +76,7 @@ export default function Login () {
           <p className='text-gray-500 sm:text-sm text-xs font-extralight -mt-5'>Parte dos cookies são apagados de hora em hora para sua segurança</p>
         </div>
       </div>
-      {/* <Loading /> */}
+      }
     </>
   )
 }

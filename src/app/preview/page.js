@@ -93,7 +93,6 @@ export default function Preview () {
       ? 'reading' : readBooks?.find((book) => book.id === id)
         ? 'read' : '#'
 
-  console.log(averageRating)
   const router = useRouter()
   return (
     <BackgroundArea>

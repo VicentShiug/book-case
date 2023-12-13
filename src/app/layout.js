@@ -15,7 +15,7 @@ export default function RootLayout ({ children }) {
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true}>
           <AuthContextProvider>
-            <div className="w-screen h-screen bg-bg bg-no-repeat bg-right p-9 pb-10 bg-white fill-slate-600">
+            <div className="w-screen h-screen bg-bg bg-left-bottom sm:p-9 p-4 sm:pb-10  bg-white fill-slate-600">
               <div className="w-full h-full ">
                 {children}
               </div>

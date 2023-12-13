@@ -22,7 +22,6 @@ import { parseCookies } from "nookies";
 export default function Home () {
   const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading, setBooksInShelf } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
-  console.log('atualizou')
   const loadData = async () => {
     const userLoad = user ? user : JSON.parse(parseCookies().user)
     if (token || userLoad) {

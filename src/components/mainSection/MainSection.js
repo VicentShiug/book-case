@@ -23,7 +23,7 @@ export default function MainSection () {
         <div className={`flex sm:mt-32 mx-10 sm:gap-16 flex-col gap-5 mt-20 sm:visible ${!open && 'invisible'} `}>
           <button
             onClick={() => setOpen((prev) => !prev)}
-            className="visible sm:invisible mt-10 p-1 rounded-xl bg-white sm:absolute shadow-md ">
+            className="visible sm:invisible mt-10 p-1 rounded-xl bg-white sm:absolute shadow-sm ">
             <div className='self-center'>
               <span className={`sm:invisible visible text-xl font-bold text-gray-700 `}>
                 {page === 1 && 'Todos os livros'
