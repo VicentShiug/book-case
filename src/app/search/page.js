@@ -5,6 +5,7 @@ import Profile from '@/components/profile/Profile'
 import SearchBar from '@/components/searchBar/SearchBar'
 import Sidebar from '@/components/sidebar/Sidebar'
 import SkeletonBookItemSearch from '@/components/skeletonBookItemSearch'
+import TopBar from '@/components/topBar/Topbar'
 import { useAuthContext } from '@/context/AuthContext'
 import React from 'react'
 
@@ -13,20 +14,20 @@ export default function Search () {
 
   return (
     <BackgroundArea>
-      <Sidebar />
-      <div className='flex flex-col w-full '>
+      <TopBar />
+      <div className='flex flex-col w-full overflow-x-hidden'>
         <SearchBar />
         {searchedBook?.length > 0 || isLoading
-          ? <div className='flex pl-11 sm:pt-40 pt-0 mb-6 sm:visible invisible'>
+          ? <div className='flex px-11 sm:pt-40 pt-0  sm:visible invisible'>
             <h1 className='text-gray-600 font-medium text-xl xl:mr-80 md:mr-10'>Título</h1>
             <h1 className='text-gray-600 font-medium text-xl xl:mr-16 md:mr-10'>Avaliação</h1>
             <h1 className='text-gray-600 font-medium text-xl xl:mr-44 md:mr-10'>Categoria</h1>
             <h1 className='text-gray-600 font-medium text-xl xl:mr-[102px] md:mr-10'>Disponibilidade</h1>
             <h1 className='text-gray-600 font-medium text-xl'>Status</h1>
           </div>
-          : <div className='flex pl-11 pt-40 mb-6'>
-            <h1 className='text-gray-600 font-medium text-xl sm:m-auto mx-2'>Comece a pesquisar !</h1>
-            </div>
+          : <div className='flex mx-auto pt-40 mb-6'>
+            <h1 className='text-gray-600 font-medium text-xl sm:m-auto '>Comece a pesquisar !</h1>
+          </div>
         }
         {
           isLoading && <SkeletonBookItemSearch count={5} />
@@ -41,9 +42,8 @@ export default function Search () {
           }
           )
         }
-        
+
       </div>
-      <Profile />
     </BackgroundArea>
   )
 }

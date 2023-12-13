@@ -9,7 +9,7 @@ export default function BooksList ({ books, className }) {
     <>
       {books?.length > 0 &&
         <div className='flex w-full py-10' >
-          <div className={'flex flex-wrap sm:gap-5 sm:mx-10 gap-4 mx-3 shrink' + className}>
+          <div className={'flex flex-wrap sm:gap-5 sm:m-10 gap-4 mx-3 shrink' + className}>
             {
               books?.map(book => {
                 return (

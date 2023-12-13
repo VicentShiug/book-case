@@ -1,10 +1,8 @@
 import { useAuthContext } from '@/context/AuthContext'
 import React from 'react'
 import BooksList from '../booksList/BooksList'
-import Profile from '../profile/Profile';
 import SkeletonBookItem from '../skeletonBookItem';
 import Link from 'next/link';
-import { MenuFourBarsIcon } from '@/icons/Icons';
 
 export default function MainSection () {
   const { readBooks, booksReading, booksToRead, isLoading, booksInShelf } = useAuthContext()
@@ -20,7 +18,7 @@ export default function MainSection () {
     <>
       <div className='w-full relative overflow-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-50 '>
         {/* <SearchBar /> */}
-        <div className={`flex sm:mt-32 mx-10 sm:gap-16 flex-col gap-5 mt-20 sm:visible ${!open && 'invisible'} `}>
+        <div className={`flex sm:mt-32 mx-10 sm:gap-16 flex-col gap-5  sm:visible ${!open && 'invisible'} `}>
           <button
             onClick={() => setOpen((prev) => !prev)}
             className="visible sm:invisible mt-10 p-1 rounded-xl bg-white sm:absolute shadow-sm ">
@@ -73,7 +71,6 @@ export default function MainSection () {
               : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Lidos&quot;</h1>
             : null
         }
-        <Profile />
       </div>
     </>
   )

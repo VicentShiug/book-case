@@ -14,7 +14,7 @@ export default function Profile () {
   };
 
   return (
-    <div className='absolute sm:top-8 sm:right-3 top-5 right-2'>
+    <div className='absolute sm:top-8 sm:right-3 top-4 right-2 z-10'>
       <div>
         <aside className='flex items-center sm:gap-5 gap-2 border-solid bg-white sm:w-52 w-32 sm:h-14 rounded-full p-1 border-2 sm:mr-10'>
           <Image className='rounded-full w-10 h-10 sm:w-12 sm:h-12'

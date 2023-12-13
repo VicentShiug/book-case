@@ -82,6 +82,7 @@ export const onGetAllBooks = async ({ user, setBooks }) => {
   books.push(...data1.items || [])
   books.push(...data2.items || [])
   books.push(...data3.items || [])
+  console.log(books)
   setBooks(books)
 }
 
@@ -90,5 +91,5 @@ export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRea
   await useGetBooksToRead({ user, setBooksToRead })
   await useGetReadBooks({ user, setReadBooks })
   await useGetFavorites({ user, setFavoriteBooks })
-  await onGetAllBooks({ user, setBooks: setBooksInShelf  })
+  await onGetAllBooks({ user, setBooks: setBooksInShelf })
 }

@@ -6,6 +6,8 @@ import MainSection from "@/components/mainSection/MainSection";
 import { UseGetAllStateBooks, onGetAllBooks } from "@/hooks/useGetBooks";
 import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
 import { parseCookies } from "nookies";
+import Profile from "@/components/profile/Profile";
+import TopBar from "@/components/topBar/Topbar";
 
 //  0 = Favorite
 //  1 = Purchased
@@ -20,29 +22,28 @@ import { parseCookies } from "nookies";
 
 
 export default function Home () {
-  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading, setBooksInShelf } = useAuthContext()
+  const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading, setBooksInShelf, isLoading } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
   const loadData = async () => {
     const userLoad = user ? user : JSON.parse(parseCookies().user)
     if (token || userLoad) {
-      UseGetAllStateBooks({ user: userLoad, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks, setBooksInShelf })
-      setIsClient(true)
+      await UseGetAllStateBooks({ user: userLoad, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks, setBooksInShelf })
+      setIsLoading(false)
     }
   }
 
 
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsClient(true)
     loadData()
-    setIsLoading(false)
   }, [])
 
   return (
     <>
       {isClient ?
         <BackgroundArea>
-          <Sidebar />
+          <TopBar />
           <MainSection />
         </BackgroundArea>
         : null}

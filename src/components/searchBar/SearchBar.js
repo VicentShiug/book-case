@@ -35,7 +35,7 @@ export default function SearchBar() {
   return (
     <>
       <div className='flex w-full'>
-        <div className='flex sm:h-12 h-10 rounded-full border-2 sm:ml-12 sm:mt-8 mt-24 mx-3  bg-white'>
+        <div className='flex sm:h-12 h-10 rounded-full border-2 sm:ml-12 sm:mt-8 mt-8 mx-3  bg-white'>
           <div
             className='cursor-pointer relative flex pr-2 items-center gap-3 bg-gray-100 rounded-s-full'
             onClick={handleClickDropdown}>

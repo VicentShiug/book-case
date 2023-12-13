@@ -4,14 +4,14 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function SkeletonBookItemSearch ({ count }) {
   return (
-    <div className='flex  overflow-auto overscroll-auto scroll-smooth relative scrollbar-thin scrollbar-thumb-blue-gray-50' >
+    <div className='flex sm:overflow-auto overflow-hidden overscroll-auto scroll-smooth relative scrollbar-thin scrollbar-thumb-blue-gray-50' >
       <div>
         {
           Array(count).fill().map((_, i) => {
             return (
-              <div key={i} className='flex w-full flex-shrink-0 h-32 mr-11 p-4 rounded-xl bg-white overflow-hidden ml-11 mb-6'>
+              <div key={i} className='flex w-full flex-shrink-0 h-32 mr-11 p-4 rounded-xl bg-white overflow-hidden sm:ml-11 mx-3 mb-6'>
                 <div className='p-1 mt-2 flex gap-28 items-center' >
-                  <Skeleton width={75} height={99} />
+                  <Skeleton width={75} height={99}/>
                   <div className='flex flex-col -ml-16'>
                     <Skeleton width={200} height={10} />
                     <Skeleton width={150} height={10} />

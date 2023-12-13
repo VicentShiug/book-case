@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function RootLayout ({ children }) {
   return (
-    <html lang="en">
+    <html lang="pt">
       <body className={inter.className} suppressHydrationWarning={true}>
           <AuthContextProvider>
             <div className="w-screen h-screen bg-bg bg-left-bottom sm:p-9 p-4 sm:pb-10  bg-white fill-slate-600">

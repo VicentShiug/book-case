@@ -11,7 +11,7 @@ export default function BookItemSearch ({ book }) {
   return (
     <div key={id} className='flex w-auto flex-shrink-0 sm:h-32 h-28  sm:p-4 p-1 rounded-xl bg-white overflow-hidden sm:mx-11 mx-3 sm:mb-6 mb-3'>
       <div className='flex '>
-        <div className='p-1 sm:mt-2 flex gap-10 items-center' >
+        <div className='p-1 sm:mt-2 flex gap-10 items-center sm:flex-row flex-col' >
           <div
             className='flex cursor-pointer items-center'
             onClick={() => router.push(`/preview/?id=${id}`)}
