@@ -14,8 +14,9 @@ export default function Search () {
 
   return (
     <BackgroundArea>
-      <TopBar />
-      <div className='flex flex-col w-full overflow-x-hidden'>
+      <TopBar sidebar profile={window.innerWidth < 640} />
+      <div className='flex flex-col w-full overflow-x-hidden relative'>
+        {window.innerWidth > 640 && <Profile />}
         <SearchBar />
         {searchedBook?.length > 0 || isLoading
           ? <div className='flex px-11 sm:pt-40 pt-0  sm:visible invisible'>

@@ -8,6 +8,7 @@ import BackgroundArea from "@/components/backgroundArea/BackgroundArea";
 import { parseCookies } from "nookies";
 import Profile from "@/components/profile/Profile";
 import TopBar from "@/components/topBar/Topbar";
+import { Button } from "@material-tailwind/react";
 
 //  0 = Favorite
 //  1 = Purchased
@@ -25,6 +26,8 @@ export default function Home () {
   const { user, token, setBooksToRead, setBooksReading, setReadBooks, setFavoriteBooks, setIsLoading, setBooksInShelf, isLoading } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
   const loadData = async () => {
+    setIsClient(true)
+    setIsLoading(true)
     const userLoad = user ? user : JSON.parse(parseCookies().user)
     if (token || userLoad) {
       await UseGetAllStateBooks({ user: userLoad, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks, setBooksInShelf })
@@ -32,10 +35,7 @@ export default function Home () {
     }
   }
 
-
-
   useEffect(() => {
-    setIsClient(true)
     loadData()
   }, [])
 
@@ -43,7 +43,7 @@ export default function Home () {
     <>
       {isClient ?
         <BackgroundArea>
-          <TopBar />
+          <TopBar sidebar profile={window.innerWidth < 640} />
           <MainSection />
         </BackgroundArea>
         : null}

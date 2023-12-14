@@ -3,6 +3,7 @@ import React from 'react'
 import BooksList from '../booksList/BooksList'
 import SkeletonBookItem from '../skeletonBookItem';
 import Link from 'next/link';
+import Profile from '../profile/Profile';
 
 export default function MainSection () {
   const { readBooks, booksReading, booksToRead, isLoading, booksInShelf } = useAuthContext()
@@ -71,6 +72,7 @@ export default function MainSection () {
               : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Lidos&quot;</h1>
             : null
         }
+        {window.innerWidth > 640 && <Profile />}
       </div>
     </>
   )

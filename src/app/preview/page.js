@@ -56,24 +56,43 @@ export default function Preview () {
     || imageLinks?.smallThumbnail
     || '/png/book-cover-placeholder.png'
 
-  const removeBook = async () => {
-    await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
-    await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
-    await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
+  const removeBook = async (from) => {
+    if (from == 'toRead') {
+      await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
+      await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
+      return
+    }
+    if (from == 'reading') {
+      await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
+      await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+      return
+    }
+    if (from == 'read') {
+      await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
+      await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+      return
+    }
+    if (!from) {
+      await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
+      await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+      await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
+      return
+    }
   }
+
   const handleChangeStateBook = async (e) => {
     setIsLoadingRequest(true)
     try {
       if (e.target.value === 'toRead') {
-        await removeBook()
+        await removeBook(e.target.value)
         return await onAddBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
       }
       if (e.target.value === 'reading') {
-        await removeBook()
+        await removeBook(e.target.value)
         return await onAddBookReading({ user, bookId: id, setBooksReading, booksReading })
       }
       if (e.target.value === 'read') {
-        await removeBook()
+        await removeBook(e.target.value)
         return await onAddBookRead({ user, bookId: id, setReadBooks, readBooks })
       }
       if (e.target.value === '#') {
@@ -97,7 +116,7 @@ export default function Preview () {
   const router = useRouter()
   return (
     <BackgroundArea>
-      <TopBar />
+      <TopBar sidebar profile />
       {
         isLoading && <SkeletonPreview />
       }
@@ -117,7 +136,7 @@ export default function Preview () {
                     unoptimized
                   />
                 </div>
-                <div className='sm:flex gap-4 hidden'>
+                <div className='sm:flex gap-4 hidden invisible'>
                   <button>Review</button>
                   <button>Notes</button>
                   <button>Share</button>
