@@ -2,13 +2,14 @@ import Image from 'next/image'
 import React from 'react'
 
 export default function BookItem ({ book }) {
+  console.log(book)
   const { volumeInfo, id } = book || {}
   const { title, authors, publishedDate, averageRating, imageLinks } = volumeInfo || {}
   return (
     <>
       {
         book &&
-        <div key={id} className='flex sm:w-40 h-72 w-32 sm:p-4 p-2 rounded-xl bg-white  overflow-hidden transition-all hover:scale-105 hover:bg-blue-gray-100'>
+        <div key={id} className='flex sm:w-40 h-72 w-32 p-2 justify-center rounded-xl bg-white  overflow-hidden transition-all hover:scale-105 hover:bg-blue-gray-100'>
           <div className='flex flex-col items-center'>
             <Image
               className='rounded-xl shadow-xl sm:!w-32 sm:!h-44 !w-24 '
