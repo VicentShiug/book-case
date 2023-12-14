@@ -52,10 +52,10 @@ export const onGetABook = async ({ id }) => {
   return data
 }
 
-export const onGetAllBooks = async ({ user, setBooks }) => {
-  const urlVolume1 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/2/volumes`;
-  const urlVolume2 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/3/volumes`;
-  const urlVolume3 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/4/volumes`;
+export const onGetAllBooks = async ({ user, setBooks, setReadBooks, setBooksReading, setBooksToRead }) => {
+  const urlVolume1 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/2/volumes?maxResults=40`; // to read
+  const urlVolume2 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/3/volumes?maxResults=40`; // reading
+  const urlVolume3 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/4/volumes?maxResults=40`; // read
 
   const response1 = await fetch(urlVolume1, {
     headers: {
@@ -79,6 +79,11 @@ export const onGetAllBooks = async ({ user, setBooks }) => {
   const data2 = await response2.json()
   const data3 = await response3.json()
   let books = []
+
+  setBooksToRead(data1.items)
+  setBooksReading(data2.items)
+  setReadBooks(data3.items)
+
   books.push(...data1.items || [])
   books.push(...data2.items || [])
   books.push(...data3.items || [])
@@ -87,9 +92,9 @@ export const onGetAllBooks = async ({ user, setBooks }) => {
 }
 
 export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks, setBooksInShelf }) => {
-  await useGetBooksReading({ user, setBooksReading })
-  await useGetBooksToRead({ user, setBooksToRead })
-  await useGetReadBooks({ user, setReadBooks })
-  await useGetFavorites({ user, setFavoriteBooks })
-  await onGetAllBooks({ user, setBooks: setBooksInShelf })
+  // await useGetBooksReading({ user, setBooksReading })
+  // await useGetBooksToRead({ user, setBooksToRead })
+  // await useGetReadBooks({ user, setReadBooks })
+  // await useGetFavorites({ user, setFavoriteBooks })
+  await onGetAllBooks({ user, setBooks: setBooksInShelf, setReadBooks, setBooksReading, setBooksToRead })
 }
