@@ -1,14 +1,13 @@
-'use client';
-import PrivateRoute from "@/components/privateRoute/PrivateRoute";
-import { checkIsPublicRoute } from "@/functions/checkIsPublicRoute";
-import { usePathname } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+'use client'
+import { usePathname } from 'next/navigation'
+import { createContext, useContext, useState } from 'react'
 
-
+import PrivateRoute from '@/components/privateRoute/PrivateRoute'
+import { checkIsPublicRoute } from '@/functions/checkIsPublicRoute'
 
 export const AuthContext = createContext()
 
-export default function AuthContextProvider ({ children }) {
+export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState()
   const [token, setToken] = useState()
   const [book, setBook] = useState([])
@@ -22,22 +21,35 @@ export default function AuthContextProvider ({ children }) {
   const [isLoading, setIsLoading] = useState(false)
 
   const pathName = usePathname()
-  const isPublicRoute = checkIsPublicRoute(pathName);
+  const isPublicRoute = checkIsPublicRoute(pathName)
 
   return (
-    <AuthContext.Provider value={{
-      user, setUser,
-      token, setToken,
-      book, setBook,
-      booksToRead, setBooksToRead,
-      booksReading, setBooksReading,
-      readBooks, setReadBooks,
-      searchedBook, setSearchedBook,
-      booksInShelf, setBooksInShelf,
-      favoriteBooks, setFavoriteBooks,
-      onShelf, setOnShelf,
-      isLoading, setIsLoading
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        token,
+        setToken,
+        book,
+        setBook,
+        booksToRead,
+        setBooksToRead,
+        booksReading,
+        setBooksReading,
+        readBooks,
+        setReadBooks,
+        searchedBook,
+        setSearchedBook,
+        booksInShelf,
+        setBooksInShelf,
+        favoriteBooks,
+        setFavoriteBooks,
+        onShelf,
+        setOnShelf,
+        isLoading,
+        setIsLoading
+      }}
+    >
       {isPublicRoute && children}
       {!isPublicRoute && <PrivateRoute>{children}</PrivateRoute>}
     </AuthContext.Provider>

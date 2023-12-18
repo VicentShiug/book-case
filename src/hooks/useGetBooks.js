@@ -1,9 +1,9 @@
 export const useGetReadBooks = async ({ user, setReadBooks }) => {
-  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/4/volumes`;
+  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/4/volumes`
 
   const response = await fetch(urlVolume, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
   const data = await response.json()
@@ -11,11 +11,11 @@ export const useGetReadBooks = async ({ user, setReadBooks }) => {
 }
 
 export const useGetBooksToRead = async ({ user, setBooksToRead }) => {
-  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/2/volumes`;
+  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/2/volumes`
 
   const response = await fetch(urlVolume, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
   const data = await response.json()
@@ -23,10 +23,10 @@ export const useGetBooksToRead = async ({ user, setBooksToRead }) => {
 }
 
 export const useGetBooksReading = async ({ user, setBooksReading }) => {
-  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/3/volumes`;
+  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/3/volumes`
   const response = await fetch(urlVolume, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
   const data = await response.json()
@@ -34,10 +34,10 @@ export const useGetBooksReading = async ({ user, setBooksReading }) => {
 }
 
 export const useGetFavorites = async ({ user, setFavoriteBooks }) => {
-  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/volumes`;
+  const urlVolume = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/volumes`
   const response = await fetch(urlVolume, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
   const data = await response.json()
@@ -45,33 +45,39 @@ export const useGetFavorites = async ({ user, setFavoriteBooks }) => {
 }
 
 export const onGetABook = async ({ id }) => {
-  const urlVolume = `https://www.googleapis.com/books/v1/volumes/${id}`;
+  const urlVolume = `https://www.googleapis.com/books/v1/volumes/${id}`
 
-  const response = await fetch(urlVolume);
-  const data = await response.json();
+  const response = await fetch(urlVolume)
+  const data = await response.json()
   return data
 }
 
-export const onGetAllBooks = async ({ user, setBooks, setReadBooks, setBooksReading, setBooksToRead }) => {
-  const urlVolume1 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/2/volumes?maxResults=40`; // to read
-  const urlVolume2 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/3/volumes?maxResults=40`; // reading
-  const urlVolume3 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/4/volumes?maxResults=40`; // read
+export const onGetAllBooks = async ({
+  user,
+  setBooks,
+  setReadBooks,
+  setBooksReading,
+  setBooksToRead
+}) => {
+  const urlVolume1 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/2/volumes?maxResults=40` // to read
+  const urlVolume2 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/3/volumes?maxResults=40` // reading
+  const urlVolume3 = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/4/volumes?maxResults=40` // read
 
   const response1 = await fetch(urlVolume1, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
 
   const response2 = await fetch(urlVolume2, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
 
   const response3 = await fetch(urlVolume3, {
     headers: {
-      'Authorization': `Bearer ${user.accessToken}`
+      Authorization: `Bearer ${user.accessToken}`
     }
   })
 
@@ -84,17 +90,42 @@ export const onGetAllBooks = async ({ user, setBooks, setReadBooks, setBooksRead
   setBooksReading(data2.items)
   setReadBooks(data3.items)
 
-  books.push(...data1.items || [])
-  books.push(...data2.items || [])
-  books.push(...data3.items || [])
+  books.push(...(data1.items || []))
+  books.push(...(data2.items || []))
+  books.push(...(data3.items || []))
+  console.log(books)
+  // books = books.map((book) => {
+  //   return book = {
+  //     id: book.id,
+  //     title: book.volumeInfo.title,
+  //     authors: book.volumeInfo.authors,
+  //     description: book.volumeInfo.description,
+  //     imageLinks: book.volumeInfo.imageLinks,
+  //     publishedDate: book.volumeInfo.publishedDate,
+  //     averageRating: book.volumeInfo.averageRating
+  //   }
+  // })
   console.log(books)
   setBooks(books)
 }
 
-export const UseGetAllStateBooks = async ({ user, setBooksReading, setBooksToRead, setReadBooks, setFavoriteBooks, setBooksInShelf }) => {
+export const UseGetAllStateBooks = async ({
+  user,
+  setBooksReading,
+  setBooksToRead,
+  setReadBooks,
+  // setFavoriteBooks,
+  setBooksInShelf
+}) => {
   // await useGetBooksReading({ user, setBooksReading })
   // await useGetBooksToRead({ user, setBooksToRead })
   // await useGetReadBooks({ user, setReadBooks })
   // await useGetFavorites({ user, setFavoriteBooks })
-  await onGetAllBooks({ user, setBooks: setBooksInShelf, setReadBooks, setBooksReading, setBooksToRead })
+  await onGetAllBooks({
+    user,
+    setBooks: setBooksInShelf,
+    setReadBooks,
+    setBooksReading,
+    setBooksToRead
+  })
 }

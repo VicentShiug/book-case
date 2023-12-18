@@ -2,5 +2,9 @@
   "cSpell.words": [
     "extralight",
     "unoptimized"
-  ]
+  ],
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
 }

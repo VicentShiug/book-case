@@ -34,10 +34,21 @@ export default function MainSection () {
             </div>
           </button>
           <div className='flex gap-5 sm:gap-16 sm:flex-row flex-col sm:bg-transparent absolute sm:relative mt-28 sm:mt-0 z-10 bg-white rounded-xl self-center sm:self-start sm:w-1/2 sm:p-0 p-8 w-72'>
-            <button className={`sm:text-2xl text-xl text-gray-700  ${page == 1 && 'font-bold'}`} onClick={() => { handleChangePage(1) }}>Todos os livros</button>
-            <button className={`sm:text-2xl text-xl text-gray-700  ${page == 2 && 'font-bold'}`} onClick={() => { handleChangePage(2) }}>Lendo</button>
-            <button className={`sm:text-2xl text-xl text-gray-700  ${page == 3 && 'font-bold'}`} onClick={() => { handleChangePage(3) }}>À ler</button>
-            <button className={`sm:text-2xl text-xl text-gray-700  ${page == 4 && 'font-bold'}`} onClick={() => { handleChangePage(4) }}>Já lidos</button>
+            <button
+              className={`sm:text-2xl text-xl text-gray-700  
+              ${page == 1 && 'font-bold'}`}
+              onClick={() => {
+                handleChangePage(1)
+              }
+              }>
+              Todos os livros
+            </button>
+            <button
+              className={`sm:text-2xl text-xl text-gray-700  ${page == 2 && 'font-bold'}`} onClick={() => { handleChangePage(2) }}>Lendo</button>
+            <button
+              className={`sm:text-2xl text-xl text-gray-700  ${page == 3 && 'font-bold'}`} onClick={() => { handleChangePage(3) }}>À ler</button>
+            <button
+              className={`sm:text-2xl text-xl text-gray-700  ${page == 4 && 'font-bold'}`} onClick={() => { handleChangePage(4) }}>Já lidos</button>
           </div>
         </div>
         {
