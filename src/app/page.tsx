@@ -8,6 +8,7 @@ import TopBar from '@/components/topBar/Topbar'
 import { useAuthContext } from '@/context/AuthContext'
 import { UseGetAllStateBooks } from '@/hooks/useGetBooks'
 import { parseCookies } from 'nookies'
+import { useQuery } from 'react-query'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fakeData = [
@@ -2674,7 +2675,7 @@ export default function Home() {
     setBooksInShelf,
     setBooksReading,
     setBooksToRead,
-    setReadBooks
+    setReadBooks,
   } = useAuthContext()
   const [isClient, setIsClient] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -2688,7 +2689,7 @@ export default function Home() {
         setBooksReading,
         setBooksToRead,
         setReadBooks,
-        setBooksInShelf
+        setBooksInShelf,
       })
 
       setIsLoading(false)
@@ -2703,19 +2704,19 @@ export default function Home() {
     setIsLoading(false)
   }
 
-  useEffect(() => {
-    // loadData()
-    loadFakeData()
-  }, [])
+  const { data, isLoading } = useQuery({
+    queryKey: ['books', 'all'],
+    queryFn: async () => { 
+      loadData()
+    },
+  })
 
   return (
     <>
-      {isClient ? (
         <BackgroundArea>
           <TopBar sidebar profile={window.innerWidth < 640} />
           <MainSection />
         </BackgroundArea>
-      ) : null}
     </>
   )
 }

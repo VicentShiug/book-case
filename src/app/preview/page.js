@@ -13,14 +13,17 @@ import { BackArrowIcon, StarIconFill } from '@/icons/Icons';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react'
+import { useQueryClient } from 'react-query';
 
 export default function Preview () {
   const { book, setBook, user,
     setBooksToRead, booksToRead,
     setBooksReading, booksReading,
     setReadBooks, readBooks,
-    isLoading, setIsLoading
+    isLoading, setIsLoading, setBooksInShelf
   } = useAuthContext()
+
+  const clientQuery = useQueryClient()
 
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false)
 
@@ -101,6 +104,7 @@ export default function Preview () {
     } catch (error) {
       console.log(error)
     } finally {
+      clientQuery.invalidateQueries('books')
       setIsLoadingRequest(false)
     }
   }

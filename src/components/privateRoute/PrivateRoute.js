@@ -15,8 +15,8 @@ export default function PrivateRoute ({ children }) {
   const isUserAuthenticated = checkIsAuthenticated()
 
   const setUserCookie = () => {
-    const user =  parseCookies()?.user
-    const userCookie =  user && JSON?.parse(user)
+    const user = parseCookies()?.user
+    const userCookie = user && JSON?.parse(user)
     return setUser(userCookie)
   }
 

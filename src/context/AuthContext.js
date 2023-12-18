@@ -7,7 +7,7 @@ import { checkIsPublicRoute } from '@/functions/checkIsPublicRoute'
 
 export const AuthContext = createContext()
 
-export default function AuthContextProvider({ children }) {
+export default function AuthContextProvider ({ children }) {
   const [user, setUser] = useState()
   const [token, setToken] = useState()
   const [book, setBook] = useState([])

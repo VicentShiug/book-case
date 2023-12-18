@@ -2,7 +2,6 @@ import Image from 'next/image'
 import React from 'react'
 
 export default function BookItem ({ book }) {
-  console.log(book)
   const { volumeInfo, id } = book || {}
   const { title, authors, publishedDate, averageRating, imageLinks } = volumeInfo || {}
   return (
