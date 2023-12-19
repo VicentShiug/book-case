@@ -1,7 +1,7 @@
 'use client'
 import { useAuthContext } from '@/context/AuthContext';
 import { auth } from '@/service/firebase';
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import LoginGoogleButton from '@/components/loginGoogleButton/LoginGoogleButton';
@@ -23,8 +23,13 @@ export default function Login () {
   const handleClickButtonLogin = async () => {
 
     const provider = new GoogleAuthProvider()
+    
     provider.addScope('https://www.googleapis.com/auth/userinfo.email');
     provider.addScope('https://www.googleapis.com/auth/books');
+    if (window.navigator.userAgent.includes('jsdom')) {
+      signInWithRedirect(auth, provider)
+      return
+    }
     const result = await signInWithPopup(auth, provider)
 
     if (result.user) {
