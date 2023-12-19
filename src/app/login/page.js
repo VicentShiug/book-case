@@ -26,11 +26,11 @@ export default function Login () {
     
     provider.addScope('https://www.googleapis.com/auth/userinfo.email');
     provider.addScope('https://www.googleapis.com/auth/books');
-    if (window.navigator.userAgent.includes('Messenger')) {
-      const result = signInWithRedirect(auth, provider)
-      return result
-    } 
-    const result = signInWithPopup(auth, provider)
+    // if (window.navigator.userAgent.includes('Messenger')) {
+    //   const result = signInWithRedirect(auth, provider)
+    //   return result
+    // } 
+    const result = signInWithRedirect(auth, provider)
 
     if (result.user) {
       const { displayName, photoURL, uid } = result.user
