@@ -15,7 +15,7 @@ export default function BooksList({ books, className }) {
                 return (
                   <div
                     key={book.id}
-                    className='flex cursor-pointer items-center '
+                    className='flex cursor-pointer items-center sm:mx-0 mx-auto'
                     onClick={() => router.push(`/preview/?id=${book.id}`)}
                   >
                     <BookItem book={book} key={book.id} />
