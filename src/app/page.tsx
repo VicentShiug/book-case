@@ -2677,12 +2677,17 @@ export default function Home() {
     setBooksToRead,
     setReadBooks,
   } = useAuthContext()
-  const [isClient, setIsClient] = useState(false)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const loadData = async () => {
-    setIsClient(true)
+
+  const loadFakeData = async () => {
     setIsLoading(true)
+    // setBooksInShelf(fakeData)
+    loadData()
+    setIsLoading(false)
+  }
+
+  const loadData = async () => {
     const userLoad = user ? user : JSON.parse(parseCookies().user)
+    setIsLoading(true)
     if (token || userLoad) {
       await UseGetAllStateBooks({
         user: userLoad,
@@ -2691,32 +2696,23 @@ export default function Home() {
         setReadBooks,
         setBooksInShelf,
       })
-
-      setIsLoading(false)
     }
-  }
-
-  const loadFakeData = async () => {
-    setIsClient(true)
-    setIsLoading(true)
-    // setBooksInShelf(fakeData)
-    loadData()
     setIsLoading(false)
   }
 
   const { data, isLoading } = useQuery({
     queryKey: ['books', 'all'],
-    queryFn: async () => { 
+    queryFn: async () => {
       loadData()
     },
   })
 
   return (
     <>
-        <BackgroundArea>
-          <TopBar sidebar profile={window.innerWidth < 640} />
-          <MainSection />
-        </BackgroundArea>
+      <BackgroundArea>
+        <TopBar sidebar profile={window.innerWidth < 640} />
+        <MainSection />
+      </BackgroundArea>
     </>
   )
 }

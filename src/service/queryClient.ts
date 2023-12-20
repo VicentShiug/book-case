@@ -1,5 +1,4 @@
 'use client'
-import { useAuthContext } from "@/context/AuthContext";
 import { QueryClient } from "react-query";
 
 export const queryClient = new QueryClient({
