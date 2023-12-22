@@ -24,7 +24,7 @@ export default function MainSection () {
             onClick={() => setOpen((prev) => !prev)}
             className="visible sm:invisible mt-10 p-1 rounded-xl bg-white sm:absolute shadow-sm ">
             <div className='self-center'>
-              <span className={`sm:invisible visible text-xl font-bold text-gray-700 `}>
+              <span className={`sm:invisible visible text-xl font-bold text-gray-700`}>
                 {page === 1 && 'Todos os livros'
                   || page === 2 && 'Lendo'
                   || page === 3 && 'À ler'
@@ -56,7 +56,7 @@ export default function MainSection () {
             ? booksInShelf
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={booksInShelf} />
-              : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que sua lista está vazia, tente pesquisar alguns livros <Link href='/search' className='font-bold text-gray-800'>clicando aqui!</Link></h1>
+              : <div className='h-64 sm:h-0'><h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que sua lista está vazia, tente pesquisar alguns livros <Link href='/search' className='font-bold text-gray-800'>clicando aqui!</Link></h1></div>
             : null
         }
         {
@@ -64,7 +64,7 @@ export default function MainSection () {
             ? booksReading
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={booksReading} />
-              : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Lendos&quot;</h1>
+              : <div className='h-64 sm:h-0'> <h1 className='text-2xl text-gray-500 mt-10 ml-10 '>Parece que não há livros na sua lista de &quot;Lendo&quot;</h1></div>
             : null
         }
         {
@@ -72,7 +72,7 @@ export default function MainSection () {
             ? booksToRead
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={booksToRead} />
-              : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;À ler&quot;</h1>
+              : <div className='h-64 sm:h-0'><h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;À ler&quot;</h1></div>
             : null
         }
         {
@@ -80,7 +80,7 @@ export default function MainSection () {
             ? readBooks
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={readBooks} />
-              : <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Lidos&quot;</h1>
+              : <div className='h-64 sm:h-0'> <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Lidos&quot;</h1></div>
             : null
         }
         {window.innerWidth > 640 && <Profile />}
