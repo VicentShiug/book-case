@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { usePreview } from './hooks';
+import { ModalToRead } from '@/components/ModalToRead/ModalToRead'
 
 export default function Preview() {
   const { get } = useSearchParams()
@@ -20,6 +21,7 @@ export default function Preview() {
 
   const { book, setBook, booksToRead, booksReading, readBooks, isLoading, setIsLoading } = useAuthContext()
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false)
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
 
   const { volumeInfo, saleInfo } = book || {}
 
@@ -119,6 +121,10 @@ export default function Preview() {
             </div>
             <div className='flex flex-col gap-4 w-10/12'>
               <p className='font-semibold'>Descrição</p>
+              <button className='bg-gray-800 text-white mx-auto rounded-md px-2 py-1' onClick={() => { setIsModalOpen((prev) => prev = !prev) }}>Ler amostra</button>
+              {
+                isModalOpen && <ModalToRead id={id} handleOpen={setIsModalOpen} open={isModalOpen} />
+              }
               <p className='text-sm font-light'>{description?.replace(/<[^>]*>?/gm, '')}</p>
             </div>
           </div>
