@@ -46,7 +46,7 @@ export default function Sidebar () {
           Pesquisar
         </Link>
         <Link
-          className={`flex gap-1 hover:text-gray-900 items-center  ${selectedOption === 'Favoritos' ? 'text-gray-900' : ''}`}
+          className={`flex gap-1 cursor-not-allowed disabled:hover:text-gray-900 items-center ${selectedOption === 'Favoritos' ? 'text-gray-900' : ''}`}
           prefetch={false}
           href="#">
           <FavIcon />
@@ -54,9 +54,9 @@ export default function Sidebar () {
         </Link>
       </div>
       <div className="flex flex-col absolute sm:bottom-14 ml-16 text-gray-400 gap-3 text-xs sm:items-start sm:right-auto bottom-0 right-0 items-end">
-        <a className="hover:text-gray-900" href="">Sobre</a>
-        <a className="hover:text-gray-900" href="">Ajuda</a>
-        <a className="hover:text-gray-900" href="">Termos de uso</a>
+        <a className="disabled:hover:text-gray-900" href="">Sobre</a>
+        <a className="disabled:hover:text-gray-900" href="">Ajuda</a>
+        <a className="disabled:hover:text-gray-900" href="">Termos de uso</a>
       </div>
     </div>
   )
