@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-export default function SkeletonPreview ({ count }) {
+export default function SkeletonPreview ({ count = 1 }) {
   return (
     <div className='flex  overflow-auto overscroll-auto scroll-smooth relative scrollbar-thin scrollbar-thumb-blue-gray-50' >
       <div>

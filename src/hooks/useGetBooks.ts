@@ -44,7 +44,7 @@ export const useGetFavorites = async ({ user, setFavoriteBooks }) => {
   setFavoriteBooks(data.items)
 }
 
-export const onGetABook = async ({ id }) => {
+export const onGetABook = async ({id }) => {
   const urlVolume = `https://www.googleapis.com/books/v1/volumes/${id}`
 
   const response = await fetch(urlVolume)

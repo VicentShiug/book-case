@@ -2,7 +2,6 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import AuthContextProvider from '@/context/AuthContext'
-import Sidebar from '@/components/sidebar/Sidebar'
 import { QueryClientProvider } from 'react-query'
 import { queryClient } from '@/service/queryClient'
 
