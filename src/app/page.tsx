@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from 'react'
 import React from 'react'
 
 import BackgroundArea from '@/components/backgroundArea/BackgroundArea'
@@ -9,6 +8,9 @@ import { useAuthContext } from '@/context/AuthContext'
 import { UseGetAllStateBooks } from '@/hooks/useGetBooks'
 import { parseCookies } from 'nookies'
 import { useQuery } from 'react-query'
+import { Button } from '@material-tailwind/react'
+import { addData, deleteData, getData, setData, updateData } from '@/hooks/useDB'
+import { createUserData, getUserData } from '@/functions/DBFunctions'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const fakeData = [
@@ -2688,15 +2690,20 @@ export default function Home() {
   const loadData = async () => {
     const userLoad = user ? user : JSON.parse(parseCookies().user)
     setIsLoading(true)
-    if (token || userLoad) {
-      await UseGetAllStateBooks({
-        user: userLoad,
-        setBooksReading,
-        setBooksToRead,
-        setReadBooks,
-        setBooksInShelf,
-      })
-    }
+    // if (token || userLoad) {
+    //   await UseGetAllStateBooks({
+    //     user: userLoad,
+    //     setBooksReading,
+    //     setBooksToRead,
+    //     setReadBooks,
+    //     setBooksInShelf,
+    //   })
+    // }
+    const { books } = await getUserData(userLoad.id)
+    setBooksReading(books.filter((book) => book.status === 'reading'))
+    setBooksToRead(books.filter((book) => book.status === 'toRead'))
+    setReadBooks(books.filter((book) => book.status === 'read'))
+    setBooksInShelf(books)
     setIsLoading(false)
   }
 
@@ -2707,11 +2714,31 @@ export default function Home() {
     },
   })
 
+  const dataLivro = {
+    title: 'O diário de Anne Frank (Resumo)',
+    authors: ['Anne Frank'],
+    publisher: 'Editora Novo Século',
+    publishedDate: '2023-04-28',
+    description:
+      'Este livro é um resumo produzido a partir da obra original. A mudança climática é real, mas não é o fim do mundo. Não é sequer nosso maior problema ambiental. Michael Shellenberger tem lutado por um planeta mais verde por décadas. Ajudou a salvar ...',
+    industryIdentifiers: [
+      {
+        type: 'OTHER',
+        identifier: 'EAN:4066339681415',
+      },
+    ],
+  }
   return (
     <>
       <BackgroundArea>
         <TopBar sidebar profile={window.innerWidth < 640} />
         <MainSection />
+        {/* <Button onClick={() => { getData() }} placeholder={'alo'} >Pegar os dados</Button>
+        <Button onClick={() => { setData({collectionName: 'IDDoFulanoChato', data: [dataLivro]}) }} placeholder={'alo'} >Seta os dados</Button>
+        <Button onClick={() => { addData({campo: 'nota', dado: '0'}) }} placeholder={'alo'} >Adiciona os dados</Button>
+        <Button onClick={() => { updateData( {livro: 'A memina que roubava livros', campo: 'data da leitura', dado: '10/12/2023'}) }} placeholder={'alo'} >Atualiza os dados</Button>
+        <Button onClick={() => { deleteData('PPclC7LdLTLHDm8QQuvI') }} placeholder={'alo'} >Apagar os dados</Button>
+        <Button onClick={() => { createUserData('testandoCreateUser')}} placeholder={'alo'} >Teste</Button> */}
       </BackgroundArea>
     </>
   )

@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation'
 
 export default function BooksList({ books, className }) {
   const router = useRouter()
-
   return (
     <>
       {books?.length > 0 &&
