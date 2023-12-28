@@ -53,7 +53,7 @@ export default function MainSection () {
         </div>
         {
           page === 1
-            ? booksInShelf
+            ? booksInShelf.length > 0
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={booksInShelf} />
               : <div className='h-64 sm:h-0'><h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que sua lista está vazia, tente pesquisar alguns livros <Link href='/search' className='font-bold text-gray-800'>clicando aqui!</Link></h1></div>
@@ -61,7 +61,7 @@ export default function MainSection () {
         }
         {
           page === 2
-            ? booksReading
+            ? booksReading.length > 0
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={booksReading} />
               : <div className='h-64 sm:h-0'> <h1 className='text-2xl text-gray-500 mt-10 ml-10 '>Parece que não há livros na sua lista de &quot;Lendo&quot;</h1></div>
@@ -69,7 +69,7 @@ export default function MainSection () {
         }
         {
           page === 3
-            ? booksToRead
+            ? booksToRead.length > 0
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={booksToRead} />
               : <div className='h-64 sm:h-0'><h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;À ler&quot;</h1></div>
@@ -77,10 +77,10 @@ export default function MainSection () {
         }
         {
           page === 4
-            ? readBooks
+            ? readBooks.length > 0
               ? isLoading ? <SkeletonBookItem count={7} />
                 : <BooksList books={readBooks} />
-              : <div className='h-64 sm:h-0'> <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Lidos&quot;</h1></div>
+              : <div className='h-64 sm:h-0'> <h1 className='text-2xl text-gray-500 mt-10 ml-10'>Parece que não há livros na sua lista de &quot;Já lidos&quot;</h1></div>
             : null
         }
         {window.innerWidth > 640 && <Profile />}

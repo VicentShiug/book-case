@@ -1,5 +1,5 @@
 import { db } from "@/service/firebase";
-import { addDoc, collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc, updateDoc, deleteField } from "firebase/firestore";
 
 export const checkHaveData = async (collectionName) => {
   const dataCol = collection(db, 'BookShelf');
@@ -37,7 +37,6 @@ export const removeBookDB = async ({ collectionName, book }) => {
   const dataCol = collection(db, 'BookShelf');
   const dataRef = doc(dataCol, collectionName);
   const data = await getUserData(collectionName);
-  const updateBooks = data.books.filter((item) => item.id !== book.id);
-  console.log(data.books.filter((item) => item.id ))
+  const updateBooks = data.books.filter((item: IBook) => item.id !== book[0].id);
   await updateDoc(dataRef, { books: updateBooks })
 }

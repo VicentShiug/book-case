@@ -2711,6 +2711,7 @@ export default function Home() {
     queryKey: ['books', 'all'],
     queryFn: async () => {
       loadData()
+      console.log('atualizou')
     },
   })
 
