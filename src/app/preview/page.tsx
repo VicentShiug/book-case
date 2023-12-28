@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { usePreview } from './hooks';
 import { ModalToRead } from '@/components/ModalToRead/ModalToRead'
+import { addBook } from '@/functions/DBFunctions';
 
 export default function Preview() {
   const { get } = useSearchParams()
@@ -19,7 +20,7 @@ export default function Preview() {
 
   const router = useRouter()
 
-  const { book, setBook, booksToRead, booksReading, readBooks, isLoading, setIsLoading } = useAuthContext()
+  const { book, setBook, booksToRead, booksReading, readBooks, isLoading, setIsLoading, user } = useAuthContext()
   const [isLoadingRequest, setIsLoadingRequest] = React.useState(false)
   const [isModalOpen, setIsModalOpen] = React.useState(false)
 
@@ -27,6 +28,17 @@ export default function Preview() {
 
   const { title, authors, description, imageLinks, publishedDate, averageRating } = volumeInfo || {}
 
+  const bookData = {
+    id: id || 'id',
+    title: title || 'title',
+    authors: authors || 'authors',
+    description: description || 'description',
+    imageLinks: imageLinks || 'imageLinks',
+    publishedDate: publishedDate || 'publishedDate',
+    averageRating: averageRating || 'averageRating',
+    saleInfo: saleInfo || 'saleInfo',
+    status: ''
+  }
 
   useEffect(() => {
     setIsLoading(true)
@@ -40,7 +52,7 @@ export default function Preview() {
   const image = getImage(imageLinks)
 
   const handleChangeState = (e: React.ChangeEvent) => {
-    handleChangeStateBook({ e, id, setIsLoadingRequest })
+    handleChangeStateBook({ e, id, setIsLoadingRequest, bookData })
   }
 
   const statusBook = status({ id, booksToRead, booksReading, readBooks })
@@ -109,7 +121,9 @@ export default function Preview() {
                   : <select
                     defaultValue={statusBook || '#'}
                     value={statusBook}
-                    onChange={(e) => { handleChangeState(e) }}
+                    onChange={(e) => {
+                      handleChangeState(e)
+                    }}
                     className="outline-none bg-gray-800 border text-white rounded-lg block sm:w-full w-4/5 py-2.5 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value='#'>{statusBook == '#' ? 'Adicionar a Lista' : 'Remover da lista'} </option>
                     <option value="reading">Lendo</option>

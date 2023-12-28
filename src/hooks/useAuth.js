@@ -3,12 +3,14 @@ import { auth } from '@/service/firebase'
 import { useRouter } from 'next/navigation'
 import { setCookie } from 'nookies'
 import React, { useContext } from 'react'
+import { useQueryClient } from 'react-query'
 
 export default function useAuth () {
   return useContext(AuthContext)
 }
 
 export const useLogout = () => {
+  const clientQuery = useQueryClient()
   const { setUser, setToken } = useContext(AuthContext)
   const router = useRouter()
   return () => {
@@ -20,5 +22,6 @@ export const useLogout = () => {
     })
     setUser(null)
     setToken(null)
+    clientQuery.invalidateQueries('books')
   }
- }
+}

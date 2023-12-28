@@ -2,8 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 export default function BookItem ({ book }) {
-  const { volumeInfo, id } = book || {}
-  const { title, authors, publishedDate, averageRating, imageLinks } = volumeInfo || {}
+  const { title, authors, publishedDate, averageRating, imageLinks, id } = book || {}
   return (
     <>
       {

@@ -1,4 +1,5 @@
 import { useAuthContext } from "@/context/AuthContext";
+import { addBook, getUserData, removeBookDB } from "@/functions/DBFunctions";
 import { onGetABook } from "@/hooks/useGetBooks";
 import { onAddBookRead, onAddBookReading, onAddBookToRead, onRemoveBookRead, onRemoveBookReading, onRemoveBookToRead } from "@/hooks/useSaveBook";
 import { useQueryClient } from "react-query";
@@ -13,14 +14,10 @@ export const usePreview = () => {
 
   const clientQuery = useQueryClient()
 
-  const getBook = async ({ id, setBook }: IGetBook): Promise<Object> => {
-    const data = await onGetABook({id});
+  const getBook = async ({ id, setBook }: IGetBook): Promise<IBook> => {
+    const data = await onGetABook({ id });
     setBook(data);
     return data;
-  }
-
-  const preview = () => {
-    console.log('preview');
   }
 
   const status = ({ booksToRead, booksReading, readBooks, id }) => {
@@ -40,48 +37,67 @@ export const usePreview = () => {
       || '/png/book-cover-placeholder.png'
   }
 
-  const removeBook = async ({ from, id }: IRemoveBook) => {
+  const removeBook = async ({ dataBook, from }: IRemoveBook) => {
     if (from == 'toRead') {
-      await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
-      await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
+      await onRemoveBookReading({ dataBook, setBooksReading, booksReading })
+      await onRemoveBookRead({ dataBook, setReadBooks, readBooks })
       return
     }
     if (from == 'reading') {
-      await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
-      await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+      await onRemoveBookRead({ dataBook, setReadBooks, readBooks })
+      await onRemoveBookToRead({ dataBook, setBooksToRead, booksToRead })
       return
     }
     if (from == 'read') {
-      await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
-      await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+      await onRemoveBookReading({ dataBook, setBooksReading, booksReading })
+      await onRemoveBookToRead({ dataBook, setBooksToRead, booksToRead })
       return
     }
-    if (!from) {
-      await onRemoveBookReading({ user, bookId: id, setBooksReading, booksReading })
-      await onRemoveBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
-      await onRemoveBookRead({ user, bookId: id, setReadBooks, readBooks })
+    if (!from || from == '#') {
+      await onRemoveBookReading({ dataBook, setBooksReading, booksReading })
+      await onRemoveBookToRead({ dataBook, setBooksToRead, booksToRead })
+      await onRemoveBookRead({ dataBook, setReadBooks, readBooks })
       return
     }
   }
 
-  const handleChangeStateBook = async ({ e, id, setIsLoadingRequest }) => {
+  const checkIsOnDatabase = async (bookData: IBook) => {
+    const booksInDB = await getUserData(user.id)
+    const isOnDatabase = booksInDB.books.find((book: IBook) => book.id === bookData.id)
+    return isOnDatabase
+  }
+
+  const addBookDB = async (bookData: IBook, from) => {
+    bookData.status = from
+    if (checkIsOnDatabase(bookData)) {
+      await removeBookDB({ collectionName: user.id, book: [bookData] })
+    }
+    addBook({ collectionName: user.id, book: [bookData] })
+  }
+
+  const handleChangeStateBook = async ({ e, id, setIsLoadingRequest, bookData }) => {
     setIsLoadingRequest(true)
     const from = e.target.value
+    const dataBook = await getBook({ id, setBook })
     try {
       if (from === 'toRead') {
-        await removeBook({ from, id })
-        return await onAddBookToRead({ user, bookId: id, setBooksToRead, booksToRead })
+        await removeBook({ from, id, dataBook })
+        await addBookDB(bookData, from)
+        return await onAddBookToRead({ dataBook, setBooksToRead, booksToRead })
       }
       if (from === 'reading') {
-        await removeBook({ from, id })
-        return await onAddBookReading({ user, bookId: id, setBooksReading, booksReading })
+        await removeBook({ from, id, dataBook })
+        await addBookDB(bookData, from)
+        return await onAddBookReading({ dataBook, setBooksReading, booksReading })
       }
       if (from === 'read') {
-        await removeBook({ from, id })
-        return await onAddBookRead({ user, bookId: id, setReadBooks, readBooks })
+        await removeBook({ from, id, dataBook })
+        await addBookDB(bookData, from)
+        return await onAddBookRead({ dataBook, setReadBooks, readBooks })
       }
       if (from === '#') {
-        return await removeBook({id})
+        await removeBookDB({ collectionName: user.id, book: [bookData] })
+        return await removeBook({ from, id, dataBook })
       }
     } catch (error) {
       console.log(error)
@@ -91,5 +107,5 @@ export const usePreview = () => {
     }
   }
 
-  return { preview, getBook, status, getImage, handleChangeStateBook }
+  return { getBook, status, getImage, handleChangeStateBook }
 }

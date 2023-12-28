@@ -4,6 +4,7 @@ interface IGetBook {
 }
 
 interface IRemoveBook { 
+  dataBook: IBook;
   from?: String;
   id?: String;
 }
